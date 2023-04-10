@@ -1,5 +1,3 @@
-import main.java.mylib.datastructures.nodes.SNode;
-
 public class QueueLL extends SLL{
 
     public QueueLL() {
@@ -11,7 +9,7 @@ public class QueueLL extends SLL{
     }
     
     public SNode dequeue() {
-        return super.removeHead();
+        return super.deleteHead();
     }
     
     public void InsertHead(SNode node) {}

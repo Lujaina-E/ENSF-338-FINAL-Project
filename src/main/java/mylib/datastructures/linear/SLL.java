@@ -1,28 +1,39 @@
-import main.java.mylib.datastructures.nodes.SNode;
+// import main.java.mylib.datastructures.nodes.SNode;
 
-class SLL{
+// javac -cp .:src/main/java/mylib/datastructures/linear/SLL.java
+// java -cp .:src.main.java.mylib.datastructures.linear.SLL
+public class SLL {
 
-    protected SNode head;
-    private SNode tail;
-    private int size;
+    protected SNode head = null;
+    private SNode tail = null;
+    private int size = 0;
     
-
-    public SLL(){
-        head = null;
-        tail = null;
-        size = 0;
-    }
+    /* Constructors */
+    public SLL() {}
 
     public SLL(SNode head) {
         this.head = head;
-        this.tail = null;
+        this.tail = head;
         this.size = 1;
     }
     
+    /* Getters */
+    public SNode getHead() { return this.head; }
+    public SNode getTail() { return this.tail; }
+    public int getSize() { return this.size; }
+
+    /* Setters */
+    public void setHead(SNode head){this.head = head;}
+    public void setTail(SNode tail){this.tail = tail;}
+    public void setSize(int size){this.size = size;} 
+
+    /* Insertion Methods */
     public void insertHead(SNode node) {
         if (head == null) {
             head = node;
             tail = node;
+        } else if (head == node) {
+            return;
         } else {
             node.setNext(head);
             head = node;
@@ -34,7 +45,10 @@ class SLL{
         if (head == null) {
             head = node;
             tail = node;
-        } else {
+        } else if (tail == node) {
+            return;
+        }
+        else {
             tail.setNext(node);
             tail = node;
         }
@@ -45,6 +59,7 @@ class SLL{
         if (position < 1 || position > size + 1) {
             throw new IndexOutOfBoundsException("Position out of bounds");
         }
+        if (search(node) != null) { return; }
         if (position == 1) {
             insertHead(node);
         } else if (position == size + 1) {
@@ -60,6 +75,7 @@ class SLL{
         }
     }
     
+    /* Sorting methods */
     public void sortedInsert(SNode node) {
         if (head == null) {
             insertHead(node);
@@ -70,7 +86,7 @@ class SLL{
         }
         SNode current = head;
         SNode previous = null;
-        while (current != null && node.compareTo(current) > 0) {
+        while (current != null && node.compareTo(node, current) > 0) {
             previous = current;
             current = current.getNext();
         }
@@ -85,43 +101,29 @@ class SLL{
         }
     }
 
-    public SNode search(SNode node) {
-        SNode current = head;
-        while (current != null) {
-            if (current.equals(node)) {
-                return current;
-            }
-            current = current.getNext();
-        }
-        return null;
-    }
-    
     private boolean isSorted() {
         SNode current = head;
         while (current != null && current.getNext() != null) {
-            if (current.compareTo(current.getNext()) > 0) {
+            if (current.compareTo(current, current.getNext()) > 0) {
                 return false;
             }
             current = current.getNext();
         }
         return true;
     }
+    
     private void sort() {
-        if (head == null) {
-            return;
-        }
+        if (head == null || this.head.getNext() == null) { return; }
         boolean swapped;
         do {
             swapped = false;
             SNode current = head;
             SNode prev = null;
-            while (current.getNext() != null) {
-                if (current.compareTo(current.getNext()) > 0) {
-                    if (prev == null) {
-                        head = current.getNext();
-                    } else {
-                        prev.setNext(current.getNext());
-                    }
+            while (current != null && current.getNext() != null) {
+                if (current.compareTo(current, current.getNext()) > 0) { //if current.value > current.next.value (meaning unsorted)
+                    if (prev == null) { head = current.getNext(); } 
+                    else { prev.setNext(current.getNext()); }
+                    
                     SNode temp = current.getNext().getNext();
                     current.getNext().setNext(current);
                     current.setNext(temp);
@@ -132,9 +134,10 @@ class SLL{
             }
             tail = current;
         } while (swapped);
+
     }
 
-
+    /* Deleting methods */
     public SNode deleteHead() {
         if (head == null) {
             throw new IndexOutOfBoundsException("List is empty");
@@ -166,10 +169,8 @@ class SLL{
         return current;
     }
 
-    public void Delete(SNode node) {
-        if (head == null) {
-            return;
-        }
+    public void delete(SNode node) {
+        if (head == null) { return; }
         if (head == node) {
             deleteHead();
             return;
@@ -178,33 +179,30 @@ class SLL{
             deleteTail();
             return;
         }
-        SNode current = head;
-        while (current != null && current.getNext() != node) {
+        if (search(node) == null) { return; }
+        
+        SNode prev = head;
+        SNode current = head.getNext();
+        while (current != node) {
+            prev = prev.getNext();
             current = current.getNext();
         }
-        if (current != null) {
-            current.next = current.getNext().next; //does this work right?
-            size--;
-        }
+        prev.setNext(current.getNext());
+        size--;
     }
 
-    public void Sort() {
+    public SNode search(SNode node) {
         SNode current = head;
         while (current != null) {
-            SNode innerCurrent = current.next;
-            while (innerCurrent != null) {
-                if (innerCurrent.value < current.value) {
-                    int temp = current.value;
-                    current.value = innerCurrent.value;
-                    innerCurrent.value = temp;
-                }
-                innerCurrent = innerCurrent.getNext();
+            if (current.getValue() == node.getValue() && current.getNext() == node.getNext()) {
+                return current;
             }
-            current = current.next;
+            current = current.getNext();
         }
+        return null;
     }
-
-    public void Clear() {
+    
+    public void clear() {
         head = null;
         tail = null;
         size = 0;
@@ -214,28 +212,98 @@ class SLL{
         System.out.println("List length: " + size);
         System.out.println("Sorted status: " + (isSorted() ? "Sorted" : "Unsorted"));
         System.out.print("List content: ");
-    
-        SNode currentNode = head;
-        while (currentNode != null) {
-            System.out.print(String.valueOf(currentNode.getValue()) + " ");
-            currentNode = currentNode.getNext();
-    }
-    System.out.println();
-    }
-
-    public SNode getHead() {
-        return head;
-    }
-
-    public boolean isEmpty() { 
-        return head == null;
+        
+        if (head == null) { System.out.print("no contents"); }
+        else {
+            SNode currentNode = head;
+            while (currentNode != null) {
+                System.out.print(String.valueOf(currentNode.getValue()));
+                if (currentNode.getNext() != null) { System.out.print(", "); }
+                currentNode = currentNode.getNext();
+            }
+        }
+        System.out.println();
     }
 
-    public int getSize() { 
-        return size;
-    }
+    public boolean isEmpty() { return head == null; }
 
-    public SNode removeHead() { //todo
-        return null;
+
+    public static void main (String[] args){
+        SNode startNode = new SNode(1, null);
+        SNode secondNode = new SNode(2, null);
+        SNode thirdNode = new SNode(3, null);
+        SNode fourthNode = new SNode(4, null);
+        SNode endNode = new SNode(5, null);
+        
+        //default constructor 
+        SLL newFunction = new SLL();
+        System.out.print("After new SLL(): \n");
+        newFunction.print();
+
+        //default constructor 
+        newFunction = new SLL(startNode);
+        System.out.print("\nAfter new SLL(startNode): \n");
+        newFunction.print();
+
+        //insert methods
+        System.out.print("\nAfter insertHead(startNode): \n");
+        newFunction.insertHead(startNode);
+        newFunction.print();
+        System.out.print("\nAfter insertTail(endNode): \n");
+        newFunction.insertTail(endNode);
+        newFunction.print();
+        System.out.print("\nAfter insert(secondNode): \n");
+        newFunction.insert(secondNode, 3);
+        newFunction.print();
+
+        // sorting methods
+        System.out.print("\nAfter sort(): \n");
+        newFunction.sort();
+        newFunction.print();
+
+        System.out.print("\nAfter insert(thirdNode, 2) (so function isn't sorted): \n");
+        newFunction.insert(thirdNode, 2);
+        newFunction.print();
+
+        System.out.print("\nAfter sortedInsert(fourthNode): \n");
+        newFunction.sortedInsert(fourthNode);
+        newFunction.print();
+
+        // searching method
+        System.out.print("\nChecking search()... \n");
+        SNode nodeNotExist = new SNode(30, null);
+        if (newFunction.search(nodeNotExist) == null) {
+            System.out.println(nodeNotExist.getValue() + " does not exist in the linked list.");
+        }
+        else { System.out.println(nodeNotExist.getValue() + " exists in the linked list.\n"); }
+
+        SNode nodeExists = new SNode(4, endNode);
+        if (newFunction.search(nodeExists) == null) {
+            System.out.println(nodeExists.getValue() + " does not exist in the linked list.");
+        }
+        else { System.out.println(nodeExists.getValue() + " exists in the linked list.\n"); }
+        
+        // deleting methods
+        System.out.print("After deleteHead(): \n");
+        newFunction.deleteHead();
+        newFunction.print();
+
+        System.out.print("\nAfter deleteTail(): \n");
+        newFunction.deleteTail();
+        newFunction.print();
+        
+        System.out.print("\nAfter delete(thirdNode): \n");
+        newFunction.delete(thirdNode);
+        newFunction.print();
+
+        System.out.print("\nAfter clear(): \n");
+        newFunction.clear();
+        newFunction.print();
+
+        System.out.print("\nChecking isEmpty()... \n");
+        if (newFunction.isEmpty()) System.out.print("list is empty!\n");
+        else System.out.print("list is not empty!\n");
+
+        System.out.println();
     }
 }
