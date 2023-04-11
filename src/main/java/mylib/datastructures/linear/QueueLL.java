@@ -1,3 +1,7 @@
+package src.main.java.mylib.datastructures.linear;
+
+import src.main.java.mylib.datastructures.nodes.SNode;
+
 public class QueueLL extends SLL{
 
     public QueueLL() {

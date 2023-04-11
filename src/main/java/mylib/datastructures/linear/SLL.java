@@ -1,7 +1,7 @@
-// import main.java.mylib.datastructures.nodes.SNode;
+package src.main.java.mylib.datastructures.linear;
 
-// javac -cp .:src/main/java/mylib/datastructures/linear/SLL.java
-// java -cp .:src.main.java.mylib.datastructures.linear.SLL
+import src.main.java.mylib.datastructures.nodes.SNode;
+
 public class SLL {
 
     protected SNode head = null;
@@ -138,17 +138,16 @@ public class SLL {
     }
 
     /* Deleting methods */
-    public SNode deleteHead() {
+    public void deleteHead() {
         if (head == null) {
             throw new IndexOutOfBoundsException("List is empty");
         }
         SNode temp = head;
         head = head.getNext();
         size--;
-        return temp;
     }
 
-    public SNode deleteTail() {
+    public void deleteTail() {
         if (head == null) {
             throw new IndexOutOfBoundsException("List is empty");
         }
@@ -166,7 +165,6 @@ public class SLL {
             tail = previous;
         }
         size--;
-        return current;
     }
 
     public void delete(SNode node) {
@@ -191,10 +189,11 @@ public class SLL {
         size--;
     }
 
+
     public SNode search(SNode node) {
         SNode current = head;
         while (current != null) {
-            if (current.getValue() == node.getValue() && current.getNext() == node.getNext()) {
+            if (current.getValue() == node.getValue()) {
                 return current;
             }
             current = current.getNext();
@@ -226,84 +225,4 @@ public class SLL {
     }
 
     public boolean isEmpty() { return head == null; }
-
-
-    public static void main (String[] args){
-        SNode startNode = new SNode(1, null);
-        SNode secondNode = new SNode(2, null);
-        SNode thirdNode = new SNode(3, null);
-        SNode fourthNode = new SNode(4, null);
-        SNode endNode = new SNode(5, null);
-        
-        //default constructor 
-        SLL newFunction = new SLL();
-        System.out.print("After new SLL(): \n");
-        newFunction.print();
-
-        //default constructor 
-        newFunction = new SLL(startNode);
-        System.out.print("\nAfter new SLL(startNode): \n");
-        newFunction.print();
-
-        //insert methods
-        System.out.print("\nAfter insertHead(startNode): \n");
-        newFunction.insertHead(startNode);
-        newFunction.print();
-        System.out.print("\nAfter insertTail(endNode): \n");
-        newFunction.insertTail(endNode);
-        newFunction.print();
-        System.out.print("\nAfter insert(secondNode): \n");
-        newFunction.insert(secondNode, 3);
-        newFunction.print();
-
-        // sorting methods
-        System.out.print("\nAfter sort(): \n");
-        newFunction.sort();
-        newFunction.print();
-
-        System.out.print("\nAfter insert(thirdNode, 2) (so function isn't sorted): \n");
-        newFunction.insert(thirdNode, 2);
-        newFunction.print();
-
-        System.out.print("\nAfter sortedInsert(fourthNode): \n");
-        newFunction.sortedInsert(fourthNode);
-        newFunction.print();
-
-        // searching method
-        System.out.print("\nChecking search()... \n");
-        SNode nodeNotExist = new SNode(30, null);
-        if (newFunction.search(nodeNotExist) == null) {
-            System.out.println(nodeNotExist.getValue() + " does not exist in the linked list.");
-        }
-        else { System.out.println(nodeNotExist.getValue() + " exists in the linked list.\n"); }
-
-        SNode nodeExists = new SNode(4, endNode);
-        if (newFunction.search(nodeExists) == null) {
-            System.out.println(nodeExists.getValue() + " does not exist in the linked list.");
-        }
-        else { System.out.println(nodeExists.getValue() + " exists in the linked list.\n"); }
-        
-        // deleting methods
-        System.out.print("After deleteHead(): \n");
-        newFunction.deleteHead();
-        newFunction.print();
-
-        System.out.print("\nAfter deleteTail(): \n");
-        newFunction.deleteTail();
-        newFunction.print();
-        
-        System.out.print("\nAfter delete(thirdNode): \n");
-        newFunction.delete(thirdNode);
-        newFunction.print();
-
-        System.out.print("\nAfter clear(): \n");
-        newFunction.clear();
-        newFunction.print();
-
-        System.out.print("\nChecking isEmpty()... \n");
-        if (newFunction.isEmpty()) System.out.print("list is empty!\n");
-        else System.out.print("list is not empty!\n");
-
-        System.out.println();
-    }
 }

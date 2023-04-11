@@ -1,3 +1,7 @@
+package src.main.java.mylib.datastructures.linear;
+
+import src.main.java.mylib.datastructures.nodes.SNode;
+
 public class CSLL extends SLL {
 
     private int size;

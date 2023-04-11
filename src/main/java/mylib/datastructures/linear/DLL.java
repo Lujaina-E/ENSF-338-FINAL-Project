@@ -1,10 +1,16 @@
-import main.java.mylib.datastructures.nodes.DNode;
+package src.main.java.mylib.datastructures.linear;
+
+import java.util.NoSuchElementException;
+
+import src.main.java.mylib.datastructures.nodes.DNode;
+
 
 public class DLL {
     private DNode head = null;
     private DNode tail = null;
     private int size = 0;
     
+    /* Constructors */
     public DLL() {}
     
     public DLL(DNode node) {
@@ -13,11 +19,24 @@ public class DLL {
         size = 1;
     }
     
+    /* Getters */
+    public DNode getHead() { return this.head; }
+    public DNode getTail() { return this.tail; }
+    public int getSize() { return this.size; }
+
+    /* Setters */
+    public void setHead(DNode head){this.head = head;}
+    public void setTail(DNode tail){this.tail = tail;}
+    public void setSize(int size){this.size = size;} 
+
+    
+    /* Insertion Methods */
     public void insertHead(DNode node) {
         if (head == null) {
             head = node;
             tail = node;
-        } else {
+        } else if (head == node) { return; }
+        else {
             node.setNext(head);
             head.setPrev(node);
             head = node;
@@ -38,69 +57,139 @@ public class DLL {
     }
     
     public void insert(DNode node, int position) {
-        if (position <= 0) {
+        if (position < 1 || position > size + 1) {
+            throw new IndexOutOfBoundsException("Position out of bounds");
+        }
+        if (search(node) != null) { return; }
+        if (position == 1) {
             insertHead(node);
-        } else if (position >= size) {
+        } else if (position == size + 1) {
             insertTail(node);
         } else {
             DNode current = head;
-            for (int i = 0; i < position; i++) {
+            for (int i = 1; i < position - 1; i++) {
                 current = current.getNext();
             }
-            node.setNext(current);
-            node.setPrev(current.getPrev());
-            current.getPrev().setNext(node);
-            current.setPrev(node);
+            node.setNext(current.getNext());
+            node.setPrev(current);
+            current.getNext().setPrev(node);
+            current.setNext(node);
             size++;
         }
     }
     
-    public void SortedInsert(DNode data) {
+    /* Sorting methods */
+    public void sortedInsert(DNode node) {
+        if (head == null) {
+            insertHead(node);
+            return;
+        }
+        if (!isSorted()) {
+            sort();
+        }
+        DNode current = head;
+        DNode previous = null;
+        while (current != null && node.compareTo(node, current) > 0) {
+            previous = current;
+            current = current.getNext();
+        }
+        if (previous == null) {
+            insertHead(node);
+        } else if (current == null) {
+            insertTail(node);
+        } else {
+            node.setNext(current);
+            node.setPrev(previous);
+            previous.setNext(node);
+            current.setPrev(node);
+            size++;
+        }
+    }    
+
+    private boolean isSorted() {
+        DNode current = head;
+        while (current != null && current.getNext() != null) {
+            if (current.compareTo(current, current.getNext()) > 0) {
+                return false;
+            }
+            current = current.getNext();
+        }
+        return true;
     }
     
-    public void deleteHead() {
-        if (head != null) {
-            head = head.getNext();
-            if (head == null) {
-                tail = null;
-            } else {
-                head.setPrev(null);
+    public void sort() {
+        if (head == null || this.head.getNext() == null) { return; }
+        boolean swapped;
+        do {
+            swapped = false;
+            DNode current = head;
+            DNode prev = null;
+            while (current != null && current.getNext() != null) {
+                if (current.compareTo(current, current.getNext()) > 0) { //if current.value > current.next.value (meaning unsorted)
+                    if (prev == null) { head = current.getNext(); } 
+                    else { prev.setNext(current.getNext()); }
+                    
+                    DNode temp = current.getNext().getNext();
+                    current.getNext().setNext(current);
+                    current.setNext(temp);
+                    swapped = true;
+                }
+                prev = current;
+                current = current.getNext();
             }
-            size--;
+            tail = current;
+        } while (swapped);
+
+    }
+
+    /* Deleting methods */
+    public void deleteHead() {
+        if (head == null) {
+            throw new NoSuchElementException();
         }
+        head = head.getNext();
+        if (head != null) {
+            head.setPrev(null);
+        } else {tail = null; }
+        size--; 
     }
     
     public void deleteTail() {
-        if (tail != null) {
+        if (head == null) { throw new IndexOutOfBoundsException("List is empty"); }
+        if (tail == null) { throw new NoSuchElementException(); }
+        if (tail == head) {
+            tail = null;
+            head = null;
+        } else {
             tail = tail.getPrev();
-            if (tail == null) {
-                head = null;
-            } else {
-                tail.setNext(null);
-            }
-            size--;
+            tail.setNext(null);
         }
+        size--;
     }
     
     public void delete(DNode node) {
-        DNode current = head;
-        while (current != null && current != node) {
-            current = current.getNext();
-        }
-        if (current == null) {
-            return;
-        }
-        if (current == head) {
-            deleteHead();
-        } else if (current == tail) {
-            deleteTail();
-        } else {
-            current.getPrev().setNext(current.getNext());
-            current.getNext().setPrev(current.getPrev());
+        if (head == null) { throw new NoSuchElementException(); }
+        if (head == node) { deleteHead(); } 
+        else if (tail == node) { deleteTail(); } 
+        else {
+            node.getPrev().setNext(node.getNext());
+            node.getNext().setPrev(node.getPrev());
+
             size--;
         }
     }
     
+    public DNode search(DNode node) {
+        DNode current = head;
+        while (current != null) {
+            if (current.getData() == node.getData()) {
+                return current;
+            }            
+            current = current.getNext();
+        }
+        return null;
+    }
+
     public void clear() {
         head = null;
         tail = null;
@@ -109,92 +198,19 @@ public class DLL {
     
     public void print() {
         System.out.println("List length: " + size);
-        System.out.println("Sorted status: N/A");
+        System.out.println("Sorted status: " + (isSorted() ? "Sorted" : "Unsorted"));
         System.out.print("List content: ");
-        DNode current = head;
-        while (current != null) {
-            System.out.print(current.getData() + " ");
-            current = current.getNext();
+        if (head == null) { System.out.print("no contents"); }
+        else {
+            DNode current = head;
+            while (current != null) {
+                System.out.print(current.getData());
+                if (current.getNext() != null) { System.out.print(", "); }
+                current = current.getNext();
+            }
         }
         System.out.println();
     }
 
-    public static void main (String[] args){
-        SNode startNode = new SNode(1, null);
-        SNode secondNode = new SNode(2, null);
-        SNode thirdNode = new SNode(3, null);
-        SNode fourthNode = new SNode(4, null);
-        SNode endNode = new SNode(5, null);
-        
-        //default constructor 
-        SLL newFunction = new SLL();
-        System.out.print("After new SLL(): \n");
-        newFunction.print();
-
-        //default constructor 
-        newFunction = new SLL(startNode);
-        System.out.print("\nAfter new SLL(startNode): \n");
-        newFunction.print();
-
-        //insert methods
-        System.out.print("\nAfter insertHead(startNode): \n");
-        newFunction.insertHead(startNode);
-        newFunction.print();
-        System.out.print("\nAfter insertTail(endNode): \n");
-        newFunction.insertTail(endNode);
-        newFunction.print();
-        System.out.print("\nAfter insert(secondNode): \n");
-        newFunction.insert(secondNode, 3);
-        newFunction.print();
-
-        // sorting methods
-        System.out.print("\nAfter sort(): \n");
-        newFunction.sort();
-        newFunction.print();
-
-        System.out.print("\nAfter insert(thirdNode, 2) (so function isn't sorted): \n");
-        newFunction.insert(thirdNode, 2);
-        newFunction.print();
-
-        System.out.print("\nAfter sortedInsert(fourthNode): \n");
-        newFunction.sortedInsert(fourthNode);
-        newFunction.print();
-
-        // searching method
-        System.out.print("\nChecking search()... \n");
-        SNode nodeNotExist = new SNode(30, null);
-        if (newFunction.search(nodeNotExist) == null) {
-            System.out.println(nodeNotExist.getValue() + " does not exist in the linked list.");
-        }
-        else { System.out.println(nodeNotExist.getValue() + " exists in the linked list.\n"); }
-
-        SNode nodeExists = new SNode(4, endNode);
-        if (newFunction.search(nodeExists) == null) {
-            System.out.println(nodeExists.getValue() + " does not exist in the linked list.");
-        }
-        else { System.out.println(nodeExists.getValue() + " exists in the linked list.\n"); }
-        
-        // deleting methods
-        System.out.print("After deleteHead(): \n");
-        newFunction.deleteHead();
-        newFunction.print();
-
-        System.out.print("\nAfter deleteTail(): \n");
-        newFunction.deleteTail();
-        newFunction.print();
-        
-        System.out.print("\nAfter delete(thirdNode): \n");
-        newFunction.delete(thirdNode);
-        newFunction.print();
-
-        System.out.print("\nAfter clear(): \n");
-        newFunction.clear();
-        newFunction.print();
-
-        System.out.print("\nChecking isEmpty()... \n");
-        if (newFunction.isEmpty()) System.out.print("list is empty!\n");
-        else System.out.print("list is not empty!\n");
-
-        System.out.println();
-    }
+    public boolean isEmpty() { return head == null; }
 }

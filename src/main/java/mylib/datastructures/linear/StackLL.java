@@ -1,3 +1,6 @@
+package src.main.java.mylib.datastructures.linear;
+import src.main.java.mylib.datastructures.nodes.SNode;
+
 public class StackLL extends SLL {
     public StackLL() {
         super();
