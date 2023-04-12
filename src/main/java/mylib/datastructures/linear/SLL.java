@@ -4,12 +4,16 @@ import src.main.java.mylib.datastructures.nodes.SNode;
 
 public class SLL {
 
-    protected SNode head = null;
-    private SNode tail = null;
-    private int size = 0;
+    protected SNode head;
+    protected SNode tail;
+    private int size;
     
     /* Constructors */
-    public SLL() {}
+    public SLL() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
 
     public SLL(SNode head) {
         this.head = head;
@@ -23,8 +27,8 @@ public class SLL {
     public int getSize() { return this.size; }
 
     /* Setters */
-    public void setHead(SNode head){this.head = head;}
-    public void setTail(SNode tail){this.tail = tail;}
+    public void setHead(SNode head){ this.head = head; }
+    public void setTail(SNode tail){ this.tail = tail; }
     public void setSize(int size){this.size = size;} 
 
     /* Insertion Methods */
@@ -112,7 +116,7 @@ public class SLL {
         return true;
     }
     
-    private void sort() {
+    public void sort() {
         if (head == null || this.head.getNext() == null) { return; }
         boolean swapped;
         do {

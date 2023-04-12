@@ -7,57 +7,91 @@ public class CSLL extends SLL {
     private int size;
     private SNode tail;
     
-    public CSLL() {
-        super();
+    /* Getters */
+    public SNode getTail() { return this.tail; }
+    public int getSize() { return this.size; }
+
+    /* Setters */
+    public void setTail(SNode node) { this.tail = node; }
+    public void setSize(int size) { this.size = size; }
+
+    /* Constructors */
+    public CSLL() { super(); }
+    public CSLL(SNode node) { 
+        super(node); 
+        tail = head;
+        size = 1;
     }
 
-    public CSLL(SNode node) {
-        super(node);
-    }
-
+    /* Insertion Methods */
+    @Override
     public void insertHead(SNode node) {
         if (isEmpty()) {
             head = node;
             tail = node;
-            tail.setNext(head);
+        } else if (head == node) {
+            return;
         } else {
             node.setNext(head);
             head = node;
-            tail.setNext(head);
         }
+        tail.setNext(head); 
         size++;
     }
-
-    public boolean isEmpty() {
-        return head == null;
-    }
-
-    // Insert at tail
+    
+    @Override
     public void insertTail(SNode node) {
         if (isEmpty()) {
             head = node;
             tail = node;
-            tail.setNext(head);
+        } else if (tail == node) {
+            return;
         } else {
             tail.setNext(node);
             tail = node;
-            tail.setNext(head);
+            if (size == 1) head.setNext(tail);
         }
+        tail.setNext(head);
         size++;
     }
 
-    // Delete head
-    public SNode deleteHead() {
+    @Override
+    public void insert(SNode node, int position) {
+        if (position < 1 || position > size + 1) {
+            throw new IndexOutOfBoundsException();
+        } 
+        //if (search(node) != null) { return; }
+        if (position == 1) {
+            insertHead(node);
+        } else if (position == size + 1) {
+            insertTail(node);
+        } else {
+            SNode current = head;
+            for (int i = 1; i < position - 1; i++) {
+                current = current.getNext();
+            }
+            node.setNext(current.getNext());
+            current.setNext(node);
+            size++;
+        }
+    }
+
+    public void sortedInsert(SNode node) {
+        super.sortedInsert(node);
+    }
+    /* Sorting methods - MISSING */
+    // sortedInsert, isSorted(), sort()
+    
+    /* Deleting methods */
+    public void deleteHead() {
         if (!isEmpty()) {
             head = head.getNext();
             tail.setNext(head);
             size--;
         }
-        return tail;
     }
 
-    // Delete tail
-    public SNode deleteTail() {
+    public void deleteTail() {
         if (!isEmpty()) {
             SNode current = head;
             SNode previous = null;
@@ -73,29 +107,8 @@ public class CSLL extends SLL {
             }
             size--;
         }
-        return tail;
     }
 
-    // Insert at position
-    public void insert(SNode node, int position) {
-        if (position < 0 || position > size) {
-            throw new IndexOutOfBoundsException();
-        } else if (position == 0) {
-            insertHead(node);
-        } else if (position == size) {
-            insertTail(node);
-        } else {
-            SNode current = head;
-            for (int i = 1; i < position; i++) {
-                current = current.getNext();
-            }
-            node.setNext(current.getNext());
-            current.setNext(node);
-            size++;
-        }
-    }
-
-    // Delete node
     public void delete(SNode node) {
         if (!isEmpty()) {
             SNode current = head;
@@ -117,18 +130,20 @@ public class CSLL extends SLL {
         }
     }
 
-    // Clear list
+
+    // search(SNode node) - MISSING  
+    
     public void clear() {
         head = null;
         tail = null;
         size = 0;
     }
 
-    // Print list
     public void print() {
         if (isEmpty()) {
             System.out.println("Empty list");
         } else {
+            System.out.print("List content: \n");
             System.out.print("[ ");
             SNode current = head;
             do {
@@ -140,4 +155,6 @@ public class CSLL extends SLL {
             System.out.println("Circular: true");
         }
     }
+
+    public boolean isEmpty() { return tail == null; }
 }

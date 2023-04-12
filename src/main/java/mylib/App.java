@@ -171,10 +171,88 @@ public class App {
 
     }
 
+    public void CSLLOutput() {
+        System.out.print("\nTESTING CSLL.JAVA...\n");
+        System.out.print("\n------------------------------\n");
+
+        SNode startNode = new SNode(1, null);
+        SNode secondNode = new SNode(2, null);
+        SNode thirdNode = new SNode(3, null);
+        SNode fourthNode = new SNode(4, null);
+        SNode endNode = new SNode(5, null);
+        
+        //default constructor 
+        CSLL newFunction1 = new CSLL();
+        System.out.print("\nAfter new CSLL(): \n");
+        newFunction1.print();
+
+        //constructor with parameter
+        CSLL newFunction = new CSLL(startNode);
+        System.out.print("\nAfter new CSLL(startNode): \n");
+        newFunction.print();
+
+        //insert methods
+        System.out.print("\nAfter insertHead(startNode): \n");
+        newFunction.insertHead(startNode);
+        newFunction.print();
+        System.out.print("\nAfter insertTail(endNode): \n");
+        newFunction.insertTail(endNode);
+        newFunction.print();
+        System.out.print("\nAfter insert(secondNode, 3): \n");
+        newFunction.insert(secondNode, 3);
+        newFunction.print();
+        System.out.print("\nAfter insert(thirdNode, 2)\n");
+        newFunction.insert(thirdNode, 2);
+        newFunction.print();
+        System.out.print("\nAfter sortedInsert(fourthNode): \n");
+        newFunction.sortedInsert(fourthNode);
+        newFunction.print();
+
+        // // searching method
+        // System.out.print("\nChecking search()... \n");
+        // SNode nodeNotExist = new SNode(30, null);
+        // if (newFunction.search(nodeNotExist) == null) {
+        //     System.out.println(nodeNotExist.getValue() + " does not exist in the linked list.");
+        // }
+        // else { System.out.println(nodeNotExist.getValue() + " exists in the linked list.\n"); }
+
+        // SNode nodeExists = new SNode(4, endNode);
+        // if (newFunction.search(nodeExists) == null) {
+        //     System.out.println(nodeExists.getValue() + " does not exist in the linked list.");
+        // }
+        // else { System.out.println(nodeExists.getValue() + " exists in the linked list.\n"); }
+        
+        // // deleting methods
+        // System.out.print("After deleteHead(): \n");
+        // newFunction.deleteHead();
+        // newFunction.print();
+
+        // System.out.print("\nAfter deleteTail(): \n");
+        // newFunction.deleteTail();
+        // newFunction.print();
+        
+        // System.out.print("\nAfter delete(thirdNode): \n");
+        // newFunction.delete(thirdNode);
+        // newFunction.print();
+
+        // System.out.print("\nAfter clear(): \n");
+        // newFunction.clear();
+        // newFunction.print();
+
+        // System.out.print("\nChecking isEmpty()... \n");
+        // if (newFunction.isEmpty()) System.out.print("list is empty!\n");
+        // else System.out.print("list is not empty!\n");
+
+        // System.out.println();
+
+    }
+
+
     public static void main (String[] args){
         App testingClasses = new App();
         //testingClasses.SLLOutput();
         testingClasses.DLLOutput();
+        testingClasses.CSLLOutput();
         
     }
     

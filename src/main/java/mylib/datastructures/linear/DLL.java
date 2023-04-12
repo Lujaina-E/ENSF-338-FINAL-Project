@@ -6,12 +6,15 @@ import src.main.java.mylib.datastructures.nodes.DNode;
 
 
 public class DLL {
-    private DNode head = null;
-    private DNode tail = null;
-    private int size = 0;
+    private DNode head, tail;
+    private int size;
     
     /* Constructors */
-    public DLL() {}
+    public DLL() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
     
     public DLL(DNode node) {
         head = node;
@@ -26,7 +29,7 @@ public class DLL {
 
     /* Setters */
     public void setHead(DNode head){this.head = head;}
-    public void setTail(DNode tail){this.tail = tail;}
+    public void setTail(DNode tail){ this.tail = tail; }
     public void setSize(int size){this.size = size;} 
 
     
