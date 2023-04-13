@@ -77,6 +77,7 @@ public class CSLL extends SLL {
     }
 
     /* Sorting methods */
+    @Override
     public void sortedInsert(SNode node) {
         if (isEmpty()) {
             insertHead(node);
@@ -115,6 +116,7 @@ public class CSLL extends SLL {
         return true;
     }
 
+    @Override
     public void sort() {
         if (isEmpty()) {
             return;
@@ -152,6 +154,7 @@ public class CSLL extends SLL {
     }
     
     /* Deleting methods */
+    @Override
     public void deleteHead() {
         if (!isEmpty()) {
             head = head.getNext();
@@ -160,6 +163,7 @@ public class CSLL extends SLL {
         }
     }
 
+    @Override
     public void deleteTail() {
         if (!isEmpty()) {
             SNode current = head;
@@ -178,6 +182,7 @@ public class CSLL extends SLL {
         }
     }
 
+    @Override
     public void delete(SNode node) {
         if (!isEmpty()) {
             SNode current = head;
@@ -200,6 +205,7 @@ public class CSLL extends SLL {
     }
 
 
+    @Override
     public SNode search(SNode node) {
         SNode current = head.getNext();
         while (current != head) {
@@ -211,8 +217,9 @@ public class CSLL extends SLL {
         return null;
     }
 
+    @Override
     public void clear() {
-        head = null;
+        super.clear();
         tail = null;
         size = 0;
     }
