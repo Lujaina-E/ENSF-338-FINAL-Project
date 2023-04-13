@@ -146,7 +146,6 @@ public class SLL {
         if (head == null) {
             throw new IndexOutOfBoundsException("List is empty");
         }
-        SNode temp = head;
         head = head.getNext();
         size--;
     }

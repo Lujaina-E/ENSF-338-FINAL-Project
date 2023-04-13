@@ -518,60 +518,93 @@ public class DataStructuresTest {
         assertEquals(startSNode, newFunction.getTail().getNext());
     }
 
-    // @Test
-    // public void testCSLLSortedInsert() {
-    //     CSLL newFunction = new CSLL(startSNode);
-    //     newFunction.insertTail(endSNode);
-    //     newFunction.insert(secondSNode, 3);
-    //     newFunction.insert(thirdSNode, 2);
-    //     newFunction.sortedInsert(fourthSNode);
-    //     // expected: 1, 2, 3, 4, 5
+    @Test
+    public void testCSLLIndexOf() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insert(secondSNode, 2);
+        newFunction.insert(thirdSNode, 3);
+        newFunction.insert(fourthSNode, 4);
+        newFunction.insert(endSNode, 5);
+        // expected: 1, 2, 3, 4, 5
 
-    //     assertEquals(4,newFunction.getHead().getNext().getNext().getNext().getValue());
-    //     assertEquals(5,newFunction.getSize());
-    // }
+        //assertTrue(newFunction.isSorted());
+        assertEquals(0, newFunction.indexOf(startSNode.getValue()));
+        assertEquals(1, newFunction.indexOf(secondSNode.getValue()));
+        assertEquals(2, newFunction.indexOf(thirdSNode.getValue()));
+        assertEquals(3, newFunction.indexOf(fourthSNode.getValue()));
+        assertEquals(4, newFunction.indexOf(endSNode.getValue()));
+    }
 
-    // @Test
-    // public void testSLLSort() {
-    //     SLL newFunction = new SLL(startSNode); 
-    //     newFunction.insertTail(endSNode);
-    //     newFunction.insert(secondSNode, 3);
-    //     newFunction.insert(thirdSNode, 2);
-    //     // before: 1, 3, 5, 2
-    //     newFunction.sort();
-    //     // after: 1, 2, 3, 5
+    @Test
+    public void testCSLLIsSorted() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insert(secondSNode, 2);
+        newFunction.insert(thirdSNode, 3);
+        newFunction.insert(fourthSNode, 4);
+        newFunction.insert(endSNode, 5);
+        // expected: 1, 2, 3, 4, 5
+        
+        assertTrue(newFunction.isSorted());
+    }
 
-    //     assertEquals(1,newFunction.getHead().getValue());
-    //     assertEquals(2,newFunction.getHead().getNext().getValue());
-    //     assertEquals(3,newFunction.getHead().getNext().getNext().getValue());
-    //     assertEquals(5,newFunction.getTail().getValue());
-    //     assertEquals(4,newFunction.getSize());
-    // }
+    @Test
+    public void testCSLLSort() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 3);
+        newFunction.insert(thirdSNode, 2);
+        // before: 1, 3, 5, 2
+        newFunction.sort();
+        // after: 1, 2, 3, 5
 
-    // @Test
-    // public void testSLLSearchDoesNotExist() {
-    //     SLL newFunction = new SLL(startSNode); 
-    //     newFunction.insertTail(endSNode);
-    //     newFunction.insert(secondSNode, 3);
-    //     newFunction.insert(thirdSNode, 2);
-    //     newFunction.sortedInsert(fourthSNode);
+        assertEquals(1, newFunction.getHead().getValue());
+        assertEquals(2, newFunction.getHead().getNext().getValue());
+        assertEquals(3, newFunction.getHead().getNext().getNext().getValue());
+        assertEquals(5, newFunction.getHead().getNext().getNext().getNext().getValue());
+        assertEquals(1, newFunction.getHead().getNext().getNext().getNext().getNext().getValue()); // looping back around
+    }
 
-    //     SNode nodeNotExist = new SNode(30, null);
-    //     assertNull(newFunction.search(nodeNotExist));
-    // }
+    @Test
+    public void testCSLLSortedInsert() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 2);
+        newFunction.insert(thirdSNode, 2);
+        // before: 1, 3, 2, 5
+        newFunction.sortedInsert(fourthSNode);
+        // expected: 1, 2, 3, 4, 5
 
-    // @Test
-    // public void testSLLSearchExists() {
-    //     SLL newFunction = new SLL(startSNode); 
-    //     newFunction.insertTail(endSNode);
-    //     newFunction.insert(secondSNode, 3);
-    //     newFunction.insert(thirdSNode, 2);
-    //     newFunction.sortedInsert(fourthSNode);
+        assertEquals(1, newFunction.getHead().getValue());
+        assertEquals(2, newFunction.getHead().getNext().getValue());
+        assertEquals(3, newFunction.getHead().getNext().getNext().getValue());
+        assertEquals(4, newFunction.getHead().getNext().getNext().getNext().getValue());
+        assertEquals(5, newFunction.getHead().getNext().getNext().getNext().getNext().getValue());
+        assertEquals(5, newFunction.getSize());
+    }
 
-    //     SNode nodeExists = new SNode(4, endSNode);
-    //     assertNotNull(newFunction.search(nodeExists));
+    @Test
+    public void testCSLLSearchDoesNotExist() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 2);
+        newFunction.insert(thirdSNode, 2);
+        // expected: 1, 3, 2, 5
 
-    // }
+        SNode nodeNotExist = new SNode(30, null);
+        assertNull(newFunction.search(nodeNotExist));
+    }
+
+    @Test
+    public void testCSLLSearchExists() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 3);
+        newFunction.insert(thirdSNode, 2);
+        newFunction.sortedInsert(fourthSNode);
+
+        SNode nodeExists = new SNode(4, endSNode);
+        assertNotNull(newFunction.search(nodeExists));
+    }
 
     @Test
     public void testCSLLDeleteHead() {
@@ -579,7 +612,6 @@ public class DataStructuresTest {
         newFunction.insertTail(endSNode);
         newFunction.insert(secondSNode, 3);
         newFunction.insert(thirdSNode, 2);
-        //newFunction.sortedInsert(fourthSNode);
         // before: 1, 3, 5, 2
 
         newFunction.deleteHead();
@@ -617,7 +649,6 @@ public class DataStructuresTest {
         // before: 1, 3, 5
         assertEquals(3, newFunction.getHead().getNext().getValue());
         assertEquals(thirdSNode, newFunction.getHead().getNext());
-        
         assertEquals(3, newFunction.getSize());
     }
 
@@ -625,7 +656,7 @@ public class DataStructuresTest {
     public void testCSLLClearAndIsEmpty() {
         CSLL newFunction = new CSLL(startSNode);
         newFunction.insert(thirdSNode, 2);
-        //newFunction.sortedInsert(fourthSNode);
+        newFunction.sortedInsert(fourthSNode);
 
         newFunction.clear();
         assertNull(newFunction.getHead());
@@ -648,6 +679,4 @@ public class DataStructuresTest {
         String actualOutput = outputStream.toString();
         assertEquals(expectedOutput, actualOutput);
      }
-
-
 }

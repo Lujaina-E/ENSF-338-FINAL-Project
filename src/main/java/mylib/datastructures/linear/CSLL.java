@@ -76,11 +76,80 @@ public class CSLL extends SLL {
         }
     }
 
+    /* Sorting methods */
     public void sortedInsert(SNode node) {
-        super.sortedInsert(node);
+        if (isEmpty()) {
+            insertHead(node);
+            return;
+        }
+        if (!isSorted()) {
+            sort();
+        }
+        SNode previous = head;
+        SNode current = head.getNext();
+        do {
+            previous = current;
+            current = current.getNext();
+        } while (node.compareTo(node, current) > 0 && current != head); // if node's value is larger than current's value 
+
+        if (current == head) insertHead(node);
+        node.setNext(current);
+        previous.setNext(node);
+        size++;
     }
-    /* Sorting methods - MISSING */
-    // sortedInsert, isSorted(), sort()
+
+    public boolean isSorted() {
+        if (isEmpty() || size == 1) {
+            return true;
+        }
+        SNode current = head.getNext();
+        do {
+            if (current == null) {
+                return false; // list is not circular
+            }
+            if (current.compareTo(current, current.getNext()) > 0) { // if current's value is larger than current.next's value 
+                return false;
+            }
+            current = current.getNext();
+        } while (current != head && current.getNext() != head);
+        return true;
+    }
+
+    public void sort() {
+        if (isEmpty()) {
+            return;
+        }
+        SNode current = head;
+        do {
+            SNode next = current.getNext();
+            while (next != head) {
+                if (current.compareTo(current, next) > 0) {
+                    // swap the data of current and next nodes
+                    int temp = current.getValue();
+                    current.setValue(next.getValue());
+                    next.setValue(temp);
+                }
+                next = next.getNext();
+            }
+            current = current.getNext();
+        } while (current != head);
+    }
+
+    public int indexOf(int data) {
+        if (isEmpty()) {
+            return -1;
+        }
+        SNode current = head.getNext();
+        int index = 1;
+        do {
+            if (current.getValue() == data) {
+                return index;
+            }
+            current = current.getNext();
+            index++;
+        } while (current != head);
+        return 0;
+    }
     
     /* Deleting methods */
     public void deleteHead() {
@@ -131,8 +200,17 @@ public class CSLL extends SLL {
     }
 
 
-    // search(SNode node) - MISSING  
-    
+    public SNode search(SNode node) {
+        SNode current = head.getNext();
+        while (current != head) {
+            if (current.getValue() == node.getValue()) {
+                return current;
+            }
+            current = current.getNext();
+        }
+        return null;
+    }
+
     public void clear() {
         head = null;
         tail = null;
