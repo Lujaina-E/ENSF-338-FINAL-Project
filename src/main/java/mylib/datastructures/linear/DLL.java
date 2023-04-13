@@ -6,8 +6,9 @@ import src.main.java.mylib.datastructures.nodes.DNode;
 
 
 public class DLL {
-    private DNode head, tail;
-    private int size;
+    protected DNode head;
+    protected DNode tail;
+    protected int size;
     
     /* Constructors */
     public DLL() {
@@ -35,7 +36,7 @@ public class DLL {
     
     /* Insertion Methods */
     public void insertHead(DNode node) {
-        if (head == null) {
+        if (isEmpty()) {
             head = node;
             tail = node;
         } else if (head == node) { return; }
@@ -48,7 +49,7 @@ public class DLL {
     }
     
     public void insertTail(DNode node) {
-        if (tail == null) {
+        if (isEmpty()) {
             head = node;
             tail = node;
         } else {
@@ -83,15 +84,15 @@ public class DLL {
     
     /* Sorting methods */
     public void sortedInsert(DNode node) {
-        if (head == null) {
+        if (isEmpty()) {
             insertHead(node);
             return;
         }
         if (!isSorted()) {
             sort();
         }
-        DNode current = head;
         DNode previous = null;
+        DNode current = head;
         while (current != null && node.compareTo(node, current) > 0) {
             previous = current;
             current = current.getNext();
@@ -142,7 +143,6 @@ public class DLL {
             }
             tail = current;
         } while (swapped);
-
     }
 
     /* Deleting methods */
@@ -181,6 +181,7 @@ public class DLL {
             size--;
         }
     }
+    
     
     public DNode search(DNode node) {
         DNode current = head;

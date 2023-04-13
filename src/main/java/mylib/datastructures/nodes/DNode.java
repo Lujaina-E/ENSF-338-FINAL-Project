@@ -8,6 +8,8 @@ public class DNode {
 
     public DNode(){}
 
+    public DNode(int data) { this.data = data; }
+
     public DNode(int data, DNode node) {
         this.data = data;
         this.prev = node;

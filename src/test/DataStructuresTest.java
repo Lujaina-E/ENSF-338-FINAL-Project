@@ -27,17 +27,16 @@ import java.util.*;
 
 public class DataStructuresTest {
 
-    // SLL Class Tests
+    /* SLL Class Tests */
 
     // SNode variables
-    SNode startSNode = new SNode(1, null);
-    SNode secondSNode = new SNode(2, null);
-    SNode thirdSNode = new SNode(3, null);
-    SNode fourthSNode = new SNode(4, null);
-    SNode endSNode = new SNode(5, null);
+    SNode startSNode = new SNode(1);
+    SNode secondSNode = new SNode(2);
+    SNode thirdSNode = new SNode(3);
+    SNode fourthSNode = new SNode(4);
+    SNode endSNode = new SNode(5);
     
-    @Test
-    //default constructor 
+    @Test 
     public void testSLLDefaultConstructor() {
         SLL newFunction = new SLL();
         assertEquals(null,newFunction.getHead());
@@ -45,8 +44,7 @@ public class DataStructuresTest {
         assertEquals(0,newFunction.getSize());
      }
 
-    @Test
-    //constructor with parameter
+    @Test 
     public void testSLLConstructor() {
         SLL newFunction = new SLL(startSNode);
         assertEquals(startSNode,newFunction.getHead());
@@ -227,16 +225,249 @@ public class DataStructuresTest {
      }
 
 
-    // DLL Class Tests
-    // DLL Node variables
-    DNode startDNode = new DNode(1, null);
-    DNode secondDNode = new DNode(2, null);
-    DNode thirdDNode = new DNode(3, null);
-    DNode fourthDNode = new DNode(4, null);
-    DNode endDNode = new DNode(5, null);
+     
+    /* CSLL Class Tests */
 
     @Test
-    //default constructor 
+    public void testCSLLDefaultConstructor() {
+        CSLL newFunction = new CSLL();
+        assertEquals(null,newFunction.getHead());
+        assertEquals(null,newFunction.getTail());
+        assertEquals(0,newFunction.getSize());
+     }
+
+    @Test 
+    public void testCSLLConstructor() {
+        CSLL newFunction = new CSLL(startSNode);
+        assertEquals(startSNode,newFunction.getHead());
+        assertEquals(startSNode,newFunction.getTail());
+        assertEquals(1,newFunction.getSize());
+    }
+
+    @Test
+    public void testCSLLGettersAndSetters() {
+        CSLL newFunction = new CSLL();
+        newFunction.setTail(endSNode);
+        assertEquals(endSNode, newFunction.getTail());
+    }
+
+    @Test
+    public void testCSLLInsertHeadEmptyList() {
+        // insert in empty list
+        CSLL newFunctionEmpty = new CSLL();
+        newFunctionEmpty.insertHead(startSNode);
+        assertEquals(startSNode, newFunctionEmpty.getHead());
+        assertEquals(startSNode, newFunctionEmpty.getTail().getNext());
+        assertEquals(startSNode, newFunctionEmpty.getTail());
+    }
+
+    @Test
+    public void testCSLLInsertHeadFullList() {
+        // insert in non-empty list
+        CSLL newFunctionFull = new CSLL(startSNode);
+        newFunctionFull.insert(thirdSNode, 2);
+        newFunctionFull.insertHead(secondSNode);
+        // expected: 2, 1, 3
+        assertEquals(secondSNode, newFunctionFull.getHead());
+        assertEquals(startSNode, newFunctionFull.getHead().getNext());
+        assertEquals(thirdSNode, newFunctionFull.getTail());
+        assertEquals(secondSNode, newFunctionFull.getTail().getNext());
+    }
+    
+    @Test
+    public void testCSLLInsertTailEmptyList() {
+        // insert in empty list
+        CSLL newFunctionEmpty = new CSLL();
+        newFunctionEmpty.insertTail(endSNode);
+        assertEquals(endSNode, newFunctionEmpty.getHead());
+        assertEquals(endSNode, newFunctionEmpty.getTail());
+        assertEquals(endSNode, newFunctionEmpty.getTail().getNext());
+
+        assertEquals(5, newFunctionEmpty.getTail().getValue());
+        assertEquals(1, newFunctionEmpty.getSize());
+    }
+
+    @Test
+    public void testCSLLInsertTailFullList() {
+        // insert in non-empty list
+        CSLL newFunctionFull = new CSLL(startSNode);
+        newFunctionFull.insert(secondSNode, 2);
+        newFunctionFull.insert(thirdSNode, 3);
+        newFunctionFull.insertTail(endSNode);
+        // expected: 1, 2, 3, 5
+        assertEquals(startSNode, newFunctionFull.getHead());
+        assertEquals(endSNode, newFunctionFull.getTail());
+        assertEquals(startSNode, newFunctionFull.getTail().getNext());
+        assertEquals(5, newFunctionFull.getTail().getValue());
+    }
+
+    @Test
+    public void testCSLLInsert() {
+        CSLL newFunction = new CSLL();
+        newFunction.insert(startSNode, 1); // expected: 1
+        assertEquals(startSNode, newFunction.getHead());
+        assertEquals(startSNode, newFunction.getTail().getNext());
+        
+        newFunction.insert(secondSNode, 2); // expected: 1, 2
+        assertEquals(secondSNode, newFunction.getHead().getNext());
+        assertEquals(secondSNode, newFunction.getTail());
+        assertEquals(startSNode, newFunction.getTail().getNext());
+
+        newFunction.insert(thirdSNode, 3); // expected: 1, 2, 3
+        assertEquals(thirdSNode, newFunction.getHead().getNext().getNext());
+        assertEquals(startSNode, newFunction.getTail().getNext());
+
+        newFunction.insert(fourthSNode, 2); // expected: 1, 4, 2, 3
+        assertEquals(fourthSNode, newFunction.getHead().getNext());
+        assertEquals(startSNode, newFunction.getTail().getNext());
+    }
+
+    @Test
+    public void testCSLLSort() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 3);
+        newFunction.insert(thirdSNode, 2);
+        newFunction.insertTail(fourthSNode);
+        // before: 1, 3, 5, 2, 4
+        newFunction.sort();
+        // after: 1, 2, 3, 4, 5
+
+        assertEquals(1, newFunction.getHead().getValue());
+        assertEquals(2, newFunction.getHead().getNext().getValue());
+        assertEquals(3, newFunction.getHead().getNext().getNext().getValue());
+        assertEquals(4, newFunction.getHead().getNext().getNext().getNext().getValue());
+        assertEquals(5, newFunction.getHead().getNext().getNext().getNext().getNext().getValue());
+        assertEquals(1, newFunction.getHead().getNext().getNext().getNext().getNext().getNext().getValue()); // looping back around
+    }
+
+    @Test
+    public void testCSLLSortedInsert() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 2);
+        newFunction.insert(thirdSNode, 2);
+        // before: 1, 3, 2, 5
+        newFunction.sortedInsert(fourthSNode);
+        // expected: 1, 2, 3, 4, 5
+
+        assertEquals(1, newFunction.getHead().getValue());
+        assertEquals(2, newFunction.getHead().getNext().getValue());
+        assertEquals(3, newFunction.getHead().getNext().getNext().getValue());
+        assertEquals(4, newFunction.getHead().getNext().getNext().getNext().getValue());
+        assertEquals(5, newFunction.getHead().getNext().getNext().getNext().getNext().getValue());
+        assertEquals(5, newFunction.getSize());
+    }
+
+    @Test
+    public void testCSLLSearchDoesNotExist() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 2);
+        newFunction.insert(thirdSNode, 2);
+        // expected: 1, 3, 2, 5
+
+        SNode nodeNotExist = new SNode(30, null);
+        assertNull(newFunction.search(nodeNotExist));
+    }
+
+    @Test
+    public void testCSLLSearchExists() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 3);
+        newFunction.insert(thirdSNode, 2);
+        newFunction.sortedInsert(fourthSNode);
+
+        SNode nodeExists = new SNode(4, endSNode);
+        assertNotNull(newFunction.search(nodeExists));
+    }
+
+    @Test
+    public void testCSLLDeleteHead() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 3);
+        newFunction.insert(thirdSNode, 2);
+        // before: 1, 3, 5, 2
+
+        newFunction.deleteHead();
+        // after: 3, 5, 2
+        assertEquals(thirdSNode, newFunction.getHead());
+        assertEquals(3, newFunction.getHead().getValue());
+        assertEquals(3, newFunction.getSize());
+     }
+
+    @Test
+    public void testCSLLDeleteTail() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(thirdSNode, 2);
+        newFunction.insert(fourthSNode, 2);
+        // before: 1, 4, 3, 5
+        newFunction.deleteTail();
+        // after: 1, 4, 3
+        assertEquals(thirdSNode, newFunction.getTail());
+        assertEquals(3, newFunction.getTail().getValue());
+        assertEquals(3, newFunction.getSize());
+    }
+
+    @Test
+    public void testCSLLDelete() { 
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(thirdSNode, 2);
+        newFunction.insert(fourthSNode, 2);
+        // before: 1, 4, 3, 5
+        assertEquals(4, newFunction.getHead().getNext().getValue());
+        assertEquals(fourthSNode, newFunction.getHead().getNext());
+
+        newFunction.delete(fourthSNode);
+        // before: 1, 3, 5
+        assertEquals(3, newFunction.getHead().getNext().getValue());
+        assertEquals(thirdSNode, newFunction.getHead().getNext());
+        assertEquals(3, newFunction.getSize());
+    }
+
+    @Test
+    public void testCSLLClearAndIsEmpty() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insert(thirdSNode, 2);
+        newFunction.sortedInsert(fourthSNode);
+
+        newFunction.clear();
+        assertNull(newFunction.getHead());
+        assertTrue(newFunction.isEmpty());
+    }
+
+    @Test
+    public void testCSLLPrint() {
+        CSLL newFunction = new CSLL(startSNode);
+        newFunction.insertTail(endSNode);
+        newFunction.insert(secondSNode, 3);
+        newFunction.insert(thirdSNode, 2);
+        // list: 1, 3, 5, 2
+
+        String expectedOutput = "List content: \n[ 1 3 5 2 ]\nList length: 4\nCircular: true\n";
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        
+        newFunction.print();
+        String actualOutput = outputStream.toString();
+        assertEquals(expectedOutput, actualOutput);
+     }
+
+     
+    /* DLL Class Tests */
+
+    // DLL Node variables
+    DNode startDNode = new DNode(1);
+    DNode secondDNode = new DNode(2);
+    DNode thirdDNode = new DNode(3);
+    DNode fourthDNode = new DNode(4);
+    DNode endDNode = new DNode(5);
+
+    @Test 
     public void testDLLDefaultConstructor() {
         DLL newFunction = new DLL();
         assertEquals(null,newFunction.getHead());
@@ -244,8 +475,7 @@ public class DataStructuresTest {
         assertEquals(0,newFunction.getSize());
      }
 
-    @Test
-    //constructor with parameter
+    @Test 
     public void testDLLConstructor() {
         DLL newFunction = new DLL(startDNode);
         assertEquals(startDNode,newFunction.getHead());
@@ -417,246 +647,224 @@ public class DataStructuresTest {
         newFunction.print();
         String actualOutput = outputStream.toString();
         assertEquals(expectedOutput, actualOutput);
-     }
+    }
 
 
-    // CSLL Class Tests
-    
+    /* CDLL Class Tests */
+
     @Test
-    //default constructor 
-    public void testCSLLDefaultConstructor() {
-        CSLL newFunction = new CSLL();
+    public void testCDLLDefaultConstructor() {
+        CDLL newFunction = new CDLL();
         assertEquals(null,newFunction.getHead());
         assertEquals(null,newFunction.getTail());
         assertEquals(0,newFunction.getSize());
      }
 
-    @Test
-    //constructor with parameter
-    public void testCSLLConstructor() {
-        CSLL newFunction = new CSLL(startSNode);
-        assertEquals(startSNode,newFunction.getHead());
-        assertEquals(startSNode,newFunction.getTail());
+    @Test 
+    public void testCDLLConstructor() {
+        CDLL newFunction = new CDLL(startDNode);
+        assertEquals(startDNode,newFunction.getHead());
+        assertEquals(startDNode,newFunction.getHead().getNext());
+        assertEquals(startDNode,newFunction.getTail());
         assertEquals(1,newFunction.getSize());
     }
 
     @Test
-    public void testCSLLGettersAndSetters() {
-        CSLL newFunction = new CSLL();
-        newFunction.setTail(endSNode);
-        assertEquals(endSNode, newFunction.getTail());
+    public void testCDLLGettersAndSetters() {
+        CDLL newFunction = new CDLL();
+        newFunction.setHead(startDNode);
+        newFunction.setTail(endDNode);
+        assertEquals(startDNode, newFunction.getHead());
+        assertEquals(endDNode, newFunction.getTail());
     }
 
     @Test
-    public void testCSLLInsertHeadEmptyList() {
+    public void testCDLLInsertHeadEmptyList() {
         // insert in empty list
-        CSLL newFunctionEmpty = new CSLL();
-        newFunctionEmpty.insertHead(startSNode);
-        assertEquals(startSNode, newFunctionEmpty.getHead());
-        assertEquals(startSNode, newFunctionEmpty.getTail().getNext());
-        assertEquals(startSNode, newFunctionEmpty.getTail());
+        CDLL newFunctionEmpty = new CDLL();
+        newFunctionEmpty.insertHead(startDNode);
+        assertEquals(startDNode, newFunctionEmpty.getHead());
+        assertEquals(startDNode, newFunctionEmpty.getTail().getNext());
+        assertEquals(startDNode, newFunctionEmpty.getTail());
     }
 
     @Test
-    public void testCSLLInsertHeadFullList() {
+    public void testCDLLInsertHeadFullList() {
         // insert in non-empty list
-        CSLL newFunctionFull = new CSLL(startSNode);
-        newFunctionFull.insert(thirdSNode, 2);
-        newFunctionFull.insertHead(secondSNode);
+        CDLL newFunctionFull = new CDLL(startDNode);
+        newFunctionFull.insert(thirdDNode, 2);
+        newFunctionFull.insertHead(secondDNode);
         // expected: 2, 1, 3
-        assertEquals(secondSNode, newFunctionFull.getHead());
-        assertEquals(startSNode, newFunctionFull.getHead().getNext());
-        assertEquals(thirdSNode, newFunctionFull.getTail());
-        assertEquals(secondSNode, newFunctionFull.getTail().getNext());
+        assertEquals(secondDNode, newFunctionFull.getHead());
+        assertEquals(startDNode, newFunctionFull.getHead().getNext());
+        assertEquals(thirdDNode, newFunctionFull.getTail());
+        assertEquals(secondDNode, newFunctionFull.getTail().getNext());
     }
     
     @Test
-    public void testCSLLInsertTailEmptyList() {
+    public void testCDLLInsertTailEmptyList() {
         // insert in empty list
-        CSLL newFunctionEmpty = new CSLL();
-        newFunctionEmpty.insertTail(endSNode);
-        assertEquals(endSNode, newFunctionEmpty.getHead());
-        assertEquals(endSNode, newFunctionEmpty.getTail());
-        assertEquals(endSNode, newFunctionEmpty.getTail().getNext());
+        CDLL newFunctionEmpty = new CDLL();
+        newFunctionEmpty.insertTail(endDNode);
+        assertEquals(endDNode, newFunctionEmpty.getHead());
+        assertEquals(endDNode, newFunctionEmpty.getTail());
+        assertEquals(endDNode, newFunctionEmpty.getTail().getNext());
 
-        assertEquals(5, newFunctionEmpty.getTail().getValue());
+        assertEquals(5, newFunctionEmpty.getTail().getData());
         assertEquals(1, newFunctionEmpty.getSize());
     }
 
     @Test
-    public void testCSLLInsertTailFullList() {
+    public void testCDLLInsertTailFullList() {
         // insert in non-empty list
-        CSLL newFunctionFull = new CSLL(startSNode);
-        newFunctionFull.insert(secondSNode, 2);
-        newFunctionFull.insert(thirdSNode, 3);
-        newFunctionFull.insertTail(endSNode);
+        CDLL newFunctionFull = new CDLL(startDNode);
+        newFunctionFull.insert(secondDNode, 2);
+        newFunctionFull.insert(thirdDNode, 3);
+        newFunctionFull.insertTail(endDNode);
         // expected: 1, 2, 3, 5
-        assertEquals(startSNode, newFunctionFull.getHead());
-        assertEquals(endSNode, newFunctionFull.getTail());
-        assertEquals(startSNode, newFunctionFull.getTail().getNext());
-        assertEquals(5, newFunctionFull.getTail().getValue());
+        assertEquals(startDNode, newFunctionFull.getHead());
+        assertEquals(endDNode, newFunctionFull.getTail());
+        assertEquals(startDNode, newFunctionFull.getTail().getNext());
+        assertEquals(5, newFunctionFull.getTail().getData());
     }
 
     @Test
-    public void testCSLLInsert() {
-        CSLL newFunction = new CSLL();
-        newFunction.insert(startSNode, 1); // expected: 1
-        assertEquals(startSNode, newFunction.getHead());
-        assertEquals(startSNode, newFunction.getTail().getNext());
+    public void testCDLLInsert() {
+        CDLL newFunction = new CDLL();
+        newFunction.insert(startDNode, 1); // expected: 1
+        assertEquals(startDNode, newFunction.getHead());
+        assertEquals(startDNode, newFunction.getTail().getNext());
         
-        newFunction.insert(secondSNode, 2); // expected: 1, 2
-        assertEquals(secondSNode, newFunction.getHead().getNext());
-        assertEquals(secondSNode, newFunction.getTail());
-        assertEquals(startSNode, newFunction.getTail().getNext());
+        newFunction.insert(secondDNode, 2); // expected: 1, 2
+        assertEquals(secondDNode, newFunction.getHead().getNext());
+        assertEquals(startDNode, newFunction.getTail().getPrev());
+        assertEquals(secondDNode, newFunction.getTail());
+        assertEquals(startDNode, newFunction.getTail().getNext());
 
-        newFunction.insert(thirdSNode, 3); // expected: 1, 2, 3
-        assertEquals(thirdSNode, newFunction.getHead().getNext().getNext());
-        assertEquals(startSNode, newFunction.getTail().getNext());
+        newFunction.insert(thirdDNode, 3); // expected: 1, 2, 3
+        assertEquals(thirdDNode, newFunction.getHead().getNext().getNext());
+        assertEquals(secondDNode, newFunction.getTail().getPrev());
+        assertEquals(startDNode, newFunction.getTail().getNext());
 
-        newFunction.insert(fourthSNode, 2); // expected: 1, 4, 2, 3
-        assertEquals(fourthSNode, newFunction.getHead().getNext());
-        assertEquals(startSNode, newFunction.getTail().getNext());
+        newFunction.insert(fourthDNode, 2); // expected: 1, 4, 2, 3
+        assertEquals(fourthDNode, newFunction.getHead().getNext());
+        assertEquals(secondDNode, newFunction.getTail().getPrev());
+        assertEquals(startDNode, newFunction.getTail().getNext());
     }
 
     @Test
-    public void testCSLLIndexOf() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insert(secondSNode, 2);
-        newFunction.insert(thirdSNode, 3);
-        newFunction.insert(fourthSNode, 4);
-        newFunction.insert(endSNode, 5);
-        // expected: 1, 2, 3, 4, 5
-
-        //assertTrue(newFunction.isSorted());
-        assertEquals(0, newFunction.indexOf(startSNode.getValue()));
-        assertEquals(1, newFunction.indexOf(secondSNode.getValue()));
-        assertEquals(2, newFunction.indexOf(thirdSNode.getValue()));
-        assertEquals(3, newFunction.indexOf(fourthSNode.getValue()));
-        assertEquals(4, newFunction.indexOf(endSNode.getValue()));
-    }
-
-    @Test
-    public void testCSLLIsSorted() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insert(secondSNode, 2);
-        newFunction.insert(thirdSNode, 3);
-        newFunction.insert(fourthSNode, 4);
-        newFunction.insert(endSNode, 5);
-        // expected: 1, 2, 3, 4, 5
-        
-        assertTrue(newFunction.isSorted());
-    }
-
-    @Test
-    public void testCSLLSort() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insertTail(endSNode);
-        newFunction.insert(secondSNode, 3);
-        newFunction.insert(thirdSNode, 2);
+    public void testCDLLSort() {
+        CDLL newFunction = new CDLL(startDNode);
+        newFunction.insertTail(endDNode);
+        newFunction.insert(secondDNode, 3);
+        newFunction.insert(thirdDNode, 2);
         // before: 1, 3, 5, 2
         newFunction.sort();
         // after: 1, 2, 3, 5
 
-        assertEquals(1, newFunction.getHead().getValue());
-        assertEquals(2, newFunction.getHead().getNext().getValue());
-        assertEquals(3, newFunction.getHead().getNext().getNext().getValue());
-        assertEquals(5, newFunction.getHead().getNext().getNext().getNext().getValue());
-        assertEquals(1, newFunction.getHead().getNext().getNext().getNext().getNext().getValue()); // looping back around
+        assertEquals(1, newFunction.getHead().getData());
+        assertEquals(2, newFunction.getHead().getNext().getData());
+        assertEquals(3, newFunction.getHead().getNext().getNext().getData());
+        assertEquals(5, newFunction.getHead().getNext().getNext().getNext().getData());
+        assertEquals(1, newFunction.getHead().getNext().getNext().getNext().getNext().getData()); // looping back around
     }
 
     @Test
-    public void testCSLLSortedInsert() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insertTail(endSNode);
-        newFunction.insert(secondSNode, 2);
-        newFunction.insert(thirdSNode, 2);
-        // before: 1, 3, 2, 5
-        newFunction.sortedInsert(fourthSNode);
+    public void testCDLLSortedInsert() {
+        CDLL newFunction = new CDLL(startDNode);
+        newFunction.insertTail(endDNode);
+        newFunction.insert(secondDNode, 2);
+        newFunction.insert(thirdDNode, 2);
+        // before: 1, 3, 5, 2
+        newFunction.sortedInsert(fourthDNode);
         // expected: 1, 2, 3, 4, 5
 
-        assertEquals(1, newFunction.getHead().getValue());
-        assertEquals(2, newFunction.getHead().getNext().getValue());
-        assertEquals(3, newFunction.getHead().getNext().getNext().getValue());
-        assertEquals(4, newFunction.getHead().getNext().getNext().getNext().getValue());
-        assertEquals(5, newFunction.getHead().getNext().getNext().getNext().getNext().getValue());
+        assertEquals(1, newFunction.getHead().getData());
+        assertEquals(2, newFunction.getHead().getNext().getData());
+        assertEquals(3, newFunction.getHead().getNext().getNext().getData());
+        assertEquals(4, newFunction.getHead().getNext().getNext().getNext().getData());
+        assertEquals(5, newFunction.getHead().getNext().getNext().getNext().getNext().getData());
         assertEquals(5, newFunction.getSize());
     }
 
     @Test
-    public void testCSLLSearchDoesNotExist() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insertTail(endSNode);
-        newFunction.insert(secondSNode, 2);
-        newFunction.insert(thirdSNode, 2);
+    public void testCDLLSearchDoesNotExist() {
+        CDLL newFunction = new CDLL(startDNode);
+        newFunction.insertTail(endDNode);
+        newFunction.insert(secondDNode, 2);
+        newFunction.insert(thirdDNode, 2);
         // expected: 1, 3, 2, 5
 
-        SNode nodeNotExist = new SNode(30, null);
+        DNode nodeNotExist = new DNode(30);
         assertNull(newFunction.search(nodeNotExist));
     }
 
     @Test
-    public void testCSLLSearchExists() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insertTail(endSNode);
-        newFunction.insert(secondSNode, 3);
-        newFunction.insert(thirdSNode, 2);
-        newFunction.sortedInsert(fourthSNode);
+    public void testCDLLSearchExists() {
+        CDLL newFunction = new CDLL(startDNode);
+        newFunction.insertTail(endDNode);
+        newFunction.insert(secondDNode, 2);
+        newFunction.insert(thirdDNode, 2);
+        newFunction.sortedInsert(fourthDNode);
 
-        SNode nodeExists = new SNode(4, endSNode);
+        DNode nodeExists = new DNode(4, endDNode);
         assertNotNull(newFunction.search(nodeExists));
     }
 
     @Test
-    public void testCSLLDeleteHead() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insertTail(endSNode);
-        newFunction.insert(secondSNode, 3);
-        newFunction.insert(thirdSNode, 2);
+    public void testCDLLDeleteHead() {
+        CDLL newFunction = new CDLL(startDNode);
+        newFunction.insertTail(endDNode);
+        newFunction.insert(secondDNode, 2);
+        newFunction.insert(thirdDNode, 2);
         // before: 1, 3, 5, 2
 
         newFunction.deleteHead();
         // after: 3, 5, 2
-        assertEquals(thirdSNode, newFunction.getHead());
-        assertEquals(3, newFunction.getHead().getValue());
+        assertEquals(thirdDNode, newFunction.getHead());
+        assertEquals(endDNode, newFunction.getHead().getPrev());
+        assertEquals(3, newFunction.getHead().getData());
         assertEquals(3, newFunction.getSize());
      }
 
     @Test
-    public void testCSLLDeleteTail() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insertTail(endSNode);
-        newFunction.insert(thirdSNode, 2);
-        newFunction.insert(fourthSNode, 2);
+    public void testCDLLDeleteTail() {
+        CDLL newFunction = new CDLL(startDNode);
+        newFunction.insertTail(endDNode);
+        newFunction.insert(thirdDNode, 2);
+        newFunction.insert(fourthDNode, 2);
         // before: 1, 4, 3, 5
         newFunction.deleteTail();
         // after: 1, 4, 3
-        assertEquals(thirdSNode, newFunction.getTail());
-        assertEquals(3, newFunction.getTail().getValue());
+
+        assertEquals(thirdDNode, newFunction.getTail());
+        assertEquals(fourthDNode, newFunction.getTail().getPrev());
+        assertEquals(3, newFunction.getTail().getData());
         assertEquals(3, newFunction.getSize());
     }
 
     @Test
-    public void testCSLLDelete() { 
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insertTail(endSNode);
-        newFunction.insert(thirdSNode, 2);
-        newFunction.insert(fourthSNode, 2);
+    public void testCDLLDelete() { 
+        CDLL newFunction = new CDLL(startDNode);
+        newFunction.insertTail(endDNode);
+        newFunction.insert(thirdDNode, 2);
+        newFunction.insert(fourthDNode, 2);
         // before: 1, 4, 3, 5
-        assertEquals(4, newFunction.getHead().getNext().getValue());
-        assertEquals(fourthSNode, newFunction.getHead().getNext());
+        assertEquals(4, newFunction.getHead().getNext().getData());
+        assertEquals(fourthDNode, newFunction.getHead().getNext());
 
-        newFunction.delete(fourthSNode);
+        newFunction.delete(fourthDNode);
         // before: 1, 3, 5
-        assertEquals(3, newFunction.getHead().getNext().getValue());
-        assertEquals(thirdSNode, newFunction.getHead().getNext());
+        assertEquals(3, newFunction.getHead().getNext().getData());
+        assertEquals(thirdDNode, newFunction.getHead().getNext());
         assertEquals(3, newFunction.getSize());
     }
 
     @Test
-    public void testCSLLClearAndIsEmpty() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insert(thirdSNode, 2);
-        newFunction.sortedInsert(fourthSNode);
+    public void testCDLLClearAndIsEmpty() {
+        CDLL newFunction = new CDLL(startDNode);
+        newFunction.insert(thirdDNode, 2);
+        newFunction.sortedInsert(fourthDNode);
 
         newFunction.clear();
         assertNull(newFunction.getHead());
@@ -664,11 +872,11 @@ public class DataStructuresTest {
     }
 
     @Test
-    public void testCSLLPrint() {
-        CSLL newFunction = new CSLL(startSNode);
-        newFunction.insertTail(endSNode);
-        newFunction.insert(secondSNode, 3);
-        newFunction.insert(thirdSNode, 2);
+    public void testCDLLPrint() {
+        CDLL newFunction = new CDLL(startDNode);
+        newFunction.insertTail(endDNode);
+        newFunction.insert(thirdDNode, 2);
+        newFunction.insertTail(secondDNode);
         // list: 1, 3, 5, 2
 
         String expectedOutput = "List content: \n[ 1 3 5 2 ]\nList length: 4\nCircular: true\n";
@@ -679,4 +887,6 @@ public class DataStructuresTest {
         String actualOutput = outputStream.toString();
         assertEquals(expectedOutput, actualOutput);
      }
+
+     
 }

@@ -6,7 +6,7 @@ public class SLL {
 
     protected SNode head;
     protected SNode tail;
-    private int size;
+    protected int size;
     
     /* Constructors */
     public SLL() {
@@ -33,7 +33,7 @@ public class SLL {
 
     /* Insertion Methods */
     public void insertHead(SNode node) {
-        if (head == null) {
+        if (isEmpty()) {
             head = node;
             tail = node;
         } else if (head == node) {
@@ -46,13 +46,12 @@ public class SLL {
     }
     
     public void insertTail(SNode node) {
-        if (head == null) {
+        if (isEmpty()) {
             head = node;
             tail = node;
         } else if (tail == node) {
             return;
-        }
-        else {
+        } else {
             tail.setNext(node);
             tail = node;
         }
@@ -81,15 +80,15 @@ public class SLL {
     
     /* Sorting methods */
     public void sortedInsert(SNode node) {
-        if (head == null) {
+        if (isEmpty()) {
             insertHead(node);
             return;
         }
         if (!isSorted()) {
             sort();
         }
-        SNode current = head;
         SNode previous = null;
+        SNode current = head;
         while (current != null && node.compareTo(node, current) > 0) {
             previous = current;
             current = current.getNext();
@@ -143,7 +142,7 @@ public class SLL {
 
     /* Deleting methods */
     public void deleteHead() {
-        if (head == null) {
+        if (isEmpty()) {
             throw new IndexOutOfBoundsException("List is empty");
         }
         head = head.getNext();
@@ -151,7 +150,7 @@ public class SLL {
     }
 
     public void deleteTail() {
-        if (head == null) {
+        if (isEmpty()) {
             throw new IndexOutOfBoundsException("List is empty");
         }
         SNode current = head;
@@ -171,7 +170,7 @@ public class SLL {
     }
 
     public void delete(SNode node) {
-        if (head == null) { return; }
+        if (isEmpty()) { return; }
         if (head == node) {
             deleteHead();
             return;

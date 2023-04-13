@@ -8,6 +8,8 @@ public class SNode {
 
     public SNode(){}
 
+    public SNode(int value){ this.value = value; }
+
     public SNode(int value, SNode next){
         this.value = value; 
         this.next = next; 
