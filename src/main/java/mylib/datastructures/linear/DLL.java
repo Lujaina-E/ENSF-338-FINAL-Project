@@ -52,6 +52,8 @@ public class DLL {
         if (isEmpty()) {
             head = node;
             tail = node;
+        } else if (tail == node) {
+            return;
         } else {
             tail.setNext(node);
             node.setPrev(tail);

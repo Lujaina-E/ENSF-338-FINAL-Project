@@ -2,34 +2,27 @@ package src.main.java.mylib.datastructures.linear;
 import src.main.java.mylib.datastructures.nodes.SNode;
 
 public class StackLL extends SLL {
-    public StackLL() {
-        super();
-    }
 
-    public void InsertTail(SNode node) {}
-    public void InsertAfter(SNode node, SNode newNode) {}
-    public void Delete(int position) {}
+    public StackLL() { super(); } 
+    public StackLL(SNode node) { super(node); }
+
+    @Override // methods from SLL to not misuse
+    public void setTail(SNode tail) {}
+    public SNode getHead() { return null; }
+    public void insertHead(SNode node) {}
+    public void insertTail(SNode node) {}
+    public void insert(SNode node, int position) {}
+    public void sortedInsert(SNode node) {}
+    public void deleteHead() {}
+    public void deleteTail() {}
+    public void delete(SNode node) {}
     
     // Function wrappers with proper naming conventions for stack functionality
-    public void push(SNode node) {
-        super.insertHead(node);
+    public void push(SNode node) { super.insertHead(node); }
+    public SNode pop() { 
+        SNode top = super.getHead();
+        super.deleteHead(); 
+        return top;
     }
-    
-    public SNode pop() {
-        return super.deleteHead();
-    }
-    
-    public SNode peek() {
-        return super.getHead();
-    }
-    
-    public boolean isEmpty() {
-        return super.isEmpty();
-    }
-    
-    public int size() {
-        return super.getSize();
-    }
-
-
+    public SNode peek() { return super.getHead(); }
 }
