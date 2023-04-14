@@ -4,8 +4,8 @@ import src.main.java.mylib.datastructures.nodes.DNode;
 
 public class CDLL extends DLL {
 
+    /* Constructors */
     public CDLL() { super(); }
-
     public CDLL(DNode node) {
         super(node);
         head.setPrev(tail);
@@ -29,6 +29,7 @@ public class CDLL extends DLL {
         tail.setNext(head);
     }
      
+    /* Sorting methods */
     @Override
     public void sortedInsert(DNode node) {
         if (isEmpty()) {
@@ -53,7 +54,7 @@ public class CDLL extends DLL {
             size++;
         }
     }    
-    
+   
     private boolean isSorted() {
         DNode current = head.getNext();
         while (current != head && current.getNext() != head) {
@@ -63,6 +64,7 @@ public class CDLL extends DLL {
         return true;
     }
 
+    @Override
     public void sort() {
         if (isEmpty() || size == 1) {
             return;
@@ -97,7 +99,6 @@ public class CDLL extends DLL {
         } while (swapped);
     }
     
-    
     /* Deleting methods */
     @Override
     public void deleteHead() {
@@ -120,6 +121,7 @@ public class CDLL extends DLL {
         tail.setNext(head);
     }
 
+    
     @Override
     public DNode search(DNode node) {
         if (isEmpty()) { return null; }
@@ -131,9 +133,9 @@ public class CDLL extends DLL {
             current = current.getNext();
         }
         return null;
-        
     }
  
+    @Override
     public void print() {
         if (isEmpty()) {
             System.out.println("Empty list");
@@ -150,8 +152,4 @@ public class CDLL extends DLL {
             System.out.println("Circular: true");
         }
     }
-    /* print() - MISSING */
-
-    @Override
-    public boolean isEmpty() { return super.isEmpty(); }
 }

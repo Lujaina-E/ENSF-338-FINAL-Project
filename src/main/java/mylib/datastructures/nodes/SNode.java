@@ -2,22 +2,20 @@ package src.main.java.mylib.datastructures.nodes;
 
 
 public class SNode {
-
     public SNode next = null;
     public int value = 0;
 
-    public SNode(){}
-
+    /* Constructors */
+    public SNode() {}
     public SNode(int value){ this.value = value; }
-
     public SNode(int value, SNode next){
         this.value = value; 
         this.next = next; 
     }
 
+    /* Getters and Setters */
     public int getValue() { return value; }
     public SNode getNext() { return next; }
-    
     public void setValue(int value) { this.value = value; }
     public void setNext(SNode nextOne) { next = nextOne;}
 

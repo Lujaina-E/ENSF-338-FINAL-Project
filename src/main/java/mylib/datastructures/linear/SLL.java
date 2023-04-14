@@ -4,17 +4,12 @@ import src.main.java.mylib.datastructures.nodes.SNode;
 
 public class SLL {
 
-    protected SNode head;
-    protected SNode tail;
-    protected int size;
+    protected SNode head = null;
+    protected SNode tail = null;
+    protected int size = 0;
     
     /* Constructors */
-    public SLL() {
-        this.head = null;
-        this.tail = null;
-        this.size = 0;
-    }
-
+    public SLL() {}
     public SLL(SNode head) {
         this.head = head;
         this.tail = head;
@@ -202,12 +197,6 @@ public class SLL {
         }
         return null;
     }
-    
-    public void clear() {
-        head = null;
-        tail = null;
-        size = 0;
-    }
 
     public void print(){
         System.out.println("List length: " + size);
@@ -226,5 +215,10 @@ public class SLL {
         System.out.println();
     }
 
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
     public boolean isEmpty() { return head == null; }
 }

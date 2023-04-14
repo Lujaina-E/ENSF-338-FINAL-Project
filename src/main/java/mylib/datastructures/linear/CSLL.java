@@ -145,8 +145,6 @@ public class CSLL extends SLL {
     }
 
     @Override
-    public void clear() { super.clear(); }
-
     public void print() {
         if (isEmpty()) {
             System.out.println("Empty list");
@@ -163,6 +161,4 @@ public class CSLL extends SLL {
             System.out.println("Circular: true");
         }
     }
-
-    public boolean isEmpty() { return super.isEmpty(); }
 }

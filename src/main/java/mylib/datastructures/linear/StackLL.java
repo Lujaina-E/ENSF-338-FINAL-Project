@@ -3,10 +3,12 @@ import src.main.java.mylib.datastructures.nodes.SNode;
 
 public class StackLL extends SLL {
 
+    /* Constructors */
     public StackLL() { super(); } 
     public StackLL(SNode node) { super(node); }
 
-    @Override // methods from SLL to not misuse
+    /* SLL methods to not misuse - overriding them with emtpy methods */
+    @Override
     public void setTail(SNode tail) {}
     public SNode getHead() { return null; }
     public void insertHead(SNode node) {}
@@ -17,12 +19,12 @@ public class StackLL extends SLL {
     public void deleteTail() {}
     public void delete(SNode node) {}
     
-    // Function wrappers with proper naming conventions for stack functionality
+    /* Stack methods - peek, push, pop */
+    public SNode peek() { return super.getHead(); }
     public void push(SNode node) { super.insertHead(node); }
     public SNode pop() { 
         SNode top = super.getHead();
         super.deleteHead(); 
         return top;
     }
-    public SNode peek() { return super.getHead(); }
 }

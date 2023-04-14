@@ -6,17 +6,12 @@ import src.main.java.mylib.datastructures.nodes.DNode;
 
 
 public class DLL {
-    protected DNode head;
-    protected DNode tail;
-    protected int size;
+    protected DNode head = null;
+    protected DNode tail = null;
+    protected int size = 0;
     
     /* Constructors */
-    public DLL() {
-        head = null;
-        tail = null;
-        size = 0;
-    }
-    
+    public DLL() {}
     public DLL(DNode node) {
         head = node;
         tail = node;
@@ -33,7 +28,6 @@ public class DLL {
     public void setTail(DNode tail){ this.tail = tail; }
     public void setSize(int size){this.size = size;} 
 
-    
     /* Insertion Methods */
     public void insertHead(DNode node) {
         if (isEmpty()) {
@@ -196,12 +190,6 @@ public class DLL {
         return null;
     }
 
-    public void clear() {
-        head = null;
-        tail = null;
-        size = 0;
-    }
-    
     public void print() {
         System.out.println("List length: " + size);
         System.out.println("Sorted status: " + (isSorted() ? "Sorted" : "Unsorted"));
@@ -218,5 +206,10 @@ public class DLL {
         System.out.println();
     }
 
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
     public boolean isEmpty() { return head == null; }
 }

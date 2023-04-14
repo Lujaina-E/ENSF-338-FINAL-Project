@@ -7,7 +7,7 @@ public class TNode {
     private TNode parent;
     private int balance;
 
-
+    /* Constructors */
     public TNode(int data) {
         this.data = data;
         this.left = null;
@@ -16,7 +16,7 @@ public class TNode {
         this.balance = 0;
     }
 
-    public TNode(int data, int balance,TNode P, TNode L, TNode R) {
+    public TNode(int data, int balance, TNode P, TNode L, TNode R) {
         this.data = data;
         this.left = L;
         this.right = R;
@@ -24,45 +24,19 @@ public class TNode {
         this.balance = 0;
     }
 
-    public int getData() {
-        return data;
-    }
-
-    public void setData(int data) {
-        this.data = data;
-    }
-
-    public TNode getLeft() {
-        return left;
-    }
-
-    public void setLeft(TNode left) {
-        this.left = left;
-    }
-
-    public TNode getRight() {
-        return right;
-    }
-
-    public void setRight(TNode right) {
-        this.right = right;
-    }
-
-    public TNode getParent() {
-        return parent;
-    }
-
-    public void setParent(TNode parent) {
-        this.parent = parent;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
+    /* Getters */
+    public int getData() { return this.data; }
+    public TNode getLeft() { return this.left; }
+    public TNode getRight() { return this.right; }
+    public TNode getParent() { return this.parent;  }
+    public int getBalance() { return this.balance; }
+    
+    /* Setters */
+    public void setData(int data) { this.data = data; }
+    public void setLeft(TNode left) { this.left = left;}
+    public void setRight(TNode right) { this.right = right; }
+    public void setParent(TNode parent) { this.parent = parent; }
+    public void setBalance(int balance) { this.balance = balance; }
 
 
     public void print(){
@@ -102,7 +76,6 @@ public class TNode {
             rightHeight = this.right.getHeight();
         }
         return Math.max(leftHeight, rightHeight) + 1;
-        
     }
 
 
