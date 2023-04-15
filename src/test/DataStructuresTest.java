@@ -1607,7 +1607,7 @@ public class DataStructuresTest {
         assertEquals(1, newTree.getRoot().getLeft().getData());
         assertNull(newTree.getRoot().getRight());
 
-        // scenario 4: if root is not null - insert right then child of right
+        // scenario 4: if root is not null - insert right and left
         AVL newTreeTest = new AVL(1);
         newTreeTest.insert(2); 
         newTreeTest.insert(3); 
@@ -1743,9 +1743,27 @@ public class DataStructuresTest {
         assertEquals(1, newTreeTest.getRoot().getLeft().getData());
         assertNull(newTreeTest.getRoot().getRight());
     }
+    
+    @Test
+    public void testAVLDeleteNotExist() {
+        AVL newTree = new AVL();
+        newTree.insert(10);
+        newTree.insert(5);
+        newTree.insert(7);
+        //   7
+        // 5    10
+        assertEquals(7, newTree.getRoot().getData());
+        assertEquals(5, newTree.getRoot().getLeft().getData());
+        assertEquals(10, newTree.getRoot().getRight().getData());
+        
+        newTree.delete(8);
+        assertEquals(7, newTree.getRoot().getData());
+        assertEquals(5, newTree.getRoot().getLeft().getData());
+        assertEquals(10, newTree.getRoot().getRight().getData());
+    }
 
     @Test 
-    public void testAVLDelete() {
+    public void testAVLDeleteMultiple() {
         AVL tree = new AVL();
         tree.insert(5);
         tree.insert(3);
@@ -1770,24 +1788,6 @@ public class DataStructuresTest {
         // Delete a node that doesn't exist in the tree
         tree.delete(10);
         assertNotNull(tree.search(2));
-    }
-    
-    @Test
-    public void testAVLDeleteNotExist() {
-        AVL newTree = new AVL();
-        newTree.insert(10);
-        newTree.insert(5);
-        newTree.insert(7);
-        //   7
-        // 5    10
-        assertEquals(7, newTree.getRoot().getData());
-        assertEquals(5, newTree.getRoot().getLeft().getData());
-        assertEquals(10, newTree.getRoot().getRight().getData());
-        
-        newTree.delete(8);
-        assertEquals(7, newTree.getRoot().getData());
-        assertEquals(5, newTree.getRoot().getLeft().getData());
-        assertEquals(10, newTree.getRoot().getRight().getData());
     }
 
     @Test

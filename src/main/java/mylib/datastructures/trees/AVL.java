@@ -35,19 +35,6 @@ public class AVL extends BST {
     }
 
     /* Deleting method */
-    // @Override
-    // public void delete(int val) {
-    //     TNode nodeToDelete = super.search(val);
-    //     if (nodeToDelete == null) {
-    //         System.out.println("Value " + val + " not found in the tree.");
-    //         return;
-    //     }
-    //     TNode parent = nodeToDelete.getParent();
-    //     super.delete(val);
-    //     root = balance(parent);
-    // }
-
-    /* Deleting method */
     @Override
     public void delete(int val) {
         root = deleteNode(root, val);
