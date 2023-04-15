@@ -1,59 +1,90 @@
-package main.java.mylib.datastructures.trees;
-import main.java.mylib.datastructures.nodes.TNode;
+package src.main.java.mylib.datastructures.trees;
+import src.main.java.mylib.datastructures.nodes.TNode;
 
 public class AVL extends BST {
-    private TNode root;
-
-    public AVL() {
-        super();
-    }
-
-    public AVL(int val) {
-        super(val);
-    }
-
+    /* Constructors */
+    public AVL() { super(); }
+    public AVL(int val) { super(val); }
     public AVL(TNode obj) {
-        this.root = obj;
+        super(obj);
         if (obj.getLeft() != null || obj.getRight() != null) {
-            this.root = balance(obj);
+            root = balance(obj);
         }
-    }
-
-    public TNode getRoot() {
-        return this.root;
     }
     
-    // setter for root
+    /* Setter */
+    @Override
     public void setRoot(TNode node) {
-        this.root = node;
+        super.setRoot(node);
         if (node.getLeft() != null || node.getRight() != null) {
-            this.root = balance(node);
+            root = balance(node);
         }
     }
 
-
+    /* Insertion Methods */
+    @Override
     public void insert(int val) {
         super.insert(val);
-        this.root = balance(this.root);
+        root = balance(root);
     }
 
+    @Override
     public void insert(TNode node) {
         super.insert(node);
-        this.root = balance(this.root);
+        root = balance(root);
     }
 
+    /* Deleting method */
+    // @Override
+    // public void delete(int val) {
+    //     TNode nodeToDelete = super.search(val);
+    //     if (nodeToDelete == null) {
+    //         System.out.println("Value " + val + " not found in the tree.");
+    //         return;
+    //     }
+    //     TNode parent = nodeToDelete.getParent();
+    //     super.delete(val);
+    //     root = balance(parent);
+    // }
 
+    /* Deleting method */
+    @Override
     public void delete(int val) {
-        TNode node = super.search(val);
-        if (node == null) {
-            System.out.println("Value " + val + " not found in the tree.");
-            return;
-        }
-        TNode parent = node.getParent();
-        super.delete(val);
-        this.root = balance(parent);
+        root = deleteNode(root, val);
+        balance(root);
     }
 
+    // Helper function to delete a node with a given value from the AVL tree
+    private TNode deleteNode(TNode node, int val) {
+        if (node == null) { return node; }
+        if (val < node.getData()) { 
+            node.setLeft(deleteNode(node.getLeft(), val));
+        } else if (val > node.getData()) {
+            node.setRight(deleteNode(node.getRight(), val));
+        } else {
+            if (node.getLeft() == null || node.getRight() == null) {
+                TNode current;
+                if (node.getLeft() == null) { current = node.getRight(); } 
+                else { current = node.getLeft(); }
+                if (current == null) { node = null; } 
+                else { node = current; }
+            } else {
+                TNode current = minValueNode(node.getRight());
+                node.setData(current.getData());
+                node.setRight(deleteNode(node.getRight(), current.getData()));
+            }
+        }
+        if (node == null) { return node; }
+        balance(node);
+        return node;
+    }
+
+    // Helper function to get the node with the minimum value from a given subtree
+    private TNode minValueNode(TNode node) {
+        TNode current = node;
+        while (current.getLeft() != null) { current = current.getLeft(); }
+        return current;
+    }
 
     private int height(TNode node) {
         if (node == null) {
@@ -62,7 +93,6 @@ public class AVL extends BST {
         return 1 + Math.max(height(node.getLeft()), height(node.getRight()));
     }
 
-
     private int balanceFactor(TNode node) {
         if (node == null) {
             return 0;
@@ -70,6 +100,7 @@ public class AVL extends BST {
         return height(node.getLeft()) - height(node.getRight());
     }
 
+    /* Rotating methods */
     private TNode rotateLeft(TNode node) {
         int height = height(node);  
         TNode right = node.getRight();
@@ -81,7 +112,6 @@ public class AVL extends BST {
         return right;
     }
 
-
     private TNode rotateRight(TNode node) {
         TNode left = node.getLeft();
         TNode rightOfLeft = left.getRight();
@@ -92,6 +122,7 @@ public class AVL extends BST {
         return left;
     }
 
+    /* Balance method */
     private TNode balance(TNode node) {
         if (node == null) {
             return null;
@@ -110,6 +141,4 @@ public class AVL extends BST {
         }
         return node;
     }
-
-
 }

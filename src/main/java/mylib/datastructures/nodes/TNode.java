@@ -38,7 +38,6 @@ public class TNode {
     public void setParent(TNode parent) { this.parent = parent; }
     public void setBalance(int balance) { this.balance = balance; }
 
-
     public void print(){
         System.out.println("Data: " + this.data);
         System.out.println("Balance: " + this.balance);
@@ -77,7 +76,5 @@ public class TNode {
         }
         return Math.max(leftHeight, rightHeight) + 1;
     }
-
-
-
 }
+
