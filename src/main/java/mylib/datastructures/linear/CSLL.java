@@ -1,6 +1,6 @@
-package src.main.java.mylib.datastructures.linear;
+package mylib.datastructures.linear;
 
-import src.main.java.mylib.datastructures.nodes.SNode;
+import mylib.datastructures.nodes.SNode;
 
 public class CSLL extends SLL {
 

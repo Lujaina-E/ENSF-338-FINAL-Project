@@ -1,5 +1,5 @@
-package src.main.java.mylib.datastructures.linear;
-import src.main.java.mylib.datastructures.nodes.SNode;
+package mylib.datastructures.linear;
+import mylib.datastructures.nodes.SNode;
 
 public class StackLL extends SLL {
 

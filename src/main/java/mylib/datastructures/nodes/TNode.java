@@ -1,4 +1,4 @@
-package src.main.java.mylib.datastructures.nodes;
+package mylib.datastructures.nodes;
 
 public class TNode {
     private int data;

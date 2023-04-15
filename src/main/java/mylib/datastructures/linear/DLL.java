@@ -1,8 +1,8 @@
-package src.main.java.mylib.datastructures.linear;
+package mylib.datastructures.linear;
 
 import java.util.NoSuchElementException;
 
-import src.main.java.mylib.datastructures.nodes.DNode;
+import mylib.datastructures.nodes.DNode;
 
 
 public class DLL {

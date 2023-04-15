@@ -1,19 +1,14 @@
-package src.test;
+package mylib;
 
 // import all files
-import src.main.java.mylib.datastructures.linear.*;
-import src.main.java.mylib.datastructures.nodes.*;
-import src.main.java.mylib.datastructures.trees.*;
+import mylib.datastructures.linear.*;
+import mylib.datastructures.nodes.*;
+import mylib.datastructures.trees.*;
 
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.*;
-import java.util.regex.*;
-import java.beans.Transient;
 import java.io.*;
-import java.sql.*;
-import java.util.*;
 
 /**
  * Terminal Commands
@@ -21,7 +16,7 @@ import java.util.*;
  * main execution: java src.main.java.mylib.datastructures.linear.SLL
  * App compilation: javac src/main/java/mylib/App.java
  * App execution: java src.main.java.mylib.App
- * test compilation: javac -cp .:src/lib/junit-4.13.2.jar:src/lib/hamcrest-core-1.3.jar src/test/DataStructuresTest.java
+ * test compilation: javac -cp .:src/lib/junit-4.13.2.jar:src/lib/hamcrest-core-1.3.jar src/test/java/mylib/DataStructuresTest.java
  * test execution: java -cp .:src/lib/junit-4.13.2.jar:src/lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore src.test.DataStructuresTest
  */
 
@@ -157,7 +152,6 @@ public class DataStructuresTest {
         assertEquals(startSNode, insertListHead.getTail());
 
         // scenario 4: if position == size + 1
-        SLL insertListTail = new SLL(startSNode);
         insertListHead.insert(secondSNode, 1); // list: 2, 1
         insertListHead.insert(endSNode, 3); // list: 2, 1, 5
         assertEquals(secondSNode, insertListHead.getHead());
