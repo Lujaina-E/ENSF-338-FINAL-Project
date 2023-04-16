@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="mylib.DataStructuresTest" time="0.043" tests="123" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="19"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/lujainaeldelebshany/Desktop/ENSF-338-FINAL-Project/target/test-classes:/Users/lujainaeldelebshany/Desktop/ENSF-338-FINAL-Project/target/classes:/Users/lujainaeldelebshany/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/lujainaeldelebshany/.m2/repository/org/hamcrest/hamcrest-core/2.2/hamcrest-core-2.2.jar:/Users/lujainaeldelebshany/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="19"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CA"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/lujainaeldelebshany/Desktop/ENSF-338-FINAL-Project/target/surefire/surefirebooter12791765542751513247.jar /Users/lujainaeldelebshany/Desktop/ENSF-338-FINAL-Project/target/surefire 2023-04-16T11-15-21_106-jvmRun1 surefire2876582234021296155tmp surefire_013581294783814556682tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/lujainaeldelebshany/Desktop/ENSF-338-FINAL-Project/target/test-classes:/Users/lujainaeldelebshany/Desktop/ENSF-338-FINAL-Project/target/classes:/Users/lujainaeldelebshany/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/lujainaeldelebshany/.m2/repository/org/hamcrest/hamcrest-core/2.2/hamcrest-core-2.2.jar:/Users/lujainaeldelebshany/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/lujainaeldelebshany"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-01-17"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/lujainaeldelebshany/Desktop/ENSF-338-FINAL-Project"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/lujainaeldelebshany/Desktop/ENSF-338-FINAL-Project/target/surefire/surefirebooter12791765542751513247.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="19.0.2+7-44"/>
+    <property name="user.name" value="lujainaeldelebshany"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="13.3.1"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="/Users/lujainaeldelebshany/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="/var/folders/v8/fcy2tkcd1fb19mqly4z9nvy40000gn/T/"/>
+    <property name="java.version" value="19.0.2"/>
+    <property name="user.dir" value="/Users/lujainaeldelebshany/Desktop/ENSF-338-FINAL-Project"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/lujainaeldelebshany/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="19.0.2+7-44"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="63.0"/>
+  </properties>
+  <testcase name="testCDLLDefaultConstructor" classname="mylib.DataStructuresTest" time="0.003"/>
+  <testcase name="testAVLConstructorWithNode" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLGettersAndSetters" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLClearAndIsEmpty" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLPeek" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLClearAndIsEmpty" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLInsertHeadEmptyList" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLInsertBetweenNodes" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTDeleteNotExist" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testBSTGetterAndSetter" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLSearchExists" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTSearchDoesNotExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLSearchExists" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLInsertMultipleNodes" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLDelete" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLPrint" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testCDLLInsertHeadEmptyList" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLGettersAndSetters" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLInsert" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTConstructorWithVal" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLDeleteHead" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testCSLLDeleteTail" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLEnqueue" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTDefaultConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLSearchDoesNotExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLInsertHead" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLInsertTail" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLInsertMultipleValues" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLDeleteHead" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testCDLLDeleteTail" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLDelete" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTInsertNode" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLInsertHead" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLInsertTail" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLGetterAndSetter" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLInsertHeadFullList" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testSLLInsertEmptyList" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLClearAndIsEmpty" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTPrintBF" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLDeleteExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTSearchExists" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLDefaultConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLSearchDoesNotExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLGettersAndSetters" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLGettersAndSetters" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTInsertMultipleValues" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLInsertNodeRightChild" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLOverrideMethods" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLSearchExists" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLSortedInsert" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLDefaultConstructor" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testCDLLSort" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLSearchDoesNotExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLDeleteMultiple" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLDeleteHead" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLDeleteTail" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLInsertTailEmptyList" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLSearchExists" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLInsertNodeDuplicate" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLDeleteHead" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testDLLDeleteTail" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLPrint" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLConstructorWithVal" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLDefaultConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTInsertVal" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLSort" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLSearchDoesNotExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLLSort" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLPrint" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testDLLConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLInsertHeadFullList" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLPrint" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLInsertTailEmptyList" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLInsertVal" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLInsertNodeLeftChild" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLClearAndIsEmpty" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLDefaultConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLDelete" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLInsertTailFullList" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testDLLSort" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLSortedInsert" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLSearchDoesNotExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLGettersAndSetters" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLClearAndIsEmpty" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTConstructorWithNode" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testDLLInsert" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLDeleteNotExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTDeleteExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLSearchExists" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testCSLLSortedInsert" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLSearchDoesNotExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLDefaultConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLSort" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLPrintInOrder" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLInsertNodeNullRoot" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLDefaultConstructor" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLSearchExists" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLConstructor" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testSLLInsertVariousPositions" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLClearAndIsEmpty" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLPop" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLPrint" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLGetterAndSetterWithChildren" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLInsertTailFullList" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testAVLPrintBF" classname="mylib.DataStructuresTest" time="0.001"/>
+  <testcase name="testQueueLLOverrideMethods" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLSortedInsert" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testBSTPrintInOrder" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testSLLInsertAlreadyExists" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLDelete" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLPrint" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLPeek" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLPush" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testStackLLSort" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLGettersAndSetters" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLSearchExists" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCSLLInsert" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testCDLLSearchDoesNotExist" classname="mylib.DataStructuresTest" time="0"/>
+  <testcase name="testQueueLLDequeue" classname="mylib.DataStructuresTest" time="0.001"/>
+</testsuite>
